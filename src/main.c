@@ -1,82 +1,59 @@
-// Author: Serhij Čepil (sipxi)
-// FIT VUT Student
-// https://github.com/sipxi
-// Date: 18/05/2025
-// Time spent: 2h
 #include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
+#include "tests.h" 
 #include "main.h"
 
-// --- Argument count ---
-#define EXPECTED_ARGS 6
-
-// --- Limits ---
-#define MAX_NUM_TRUCKS         10000
-#define MAX_NUM_CARS           10000
-
-// --- Capacity constraints ---
-#define MIN_CAPACITY_TRAFFIC   3
-#define MAX_CAPACITY_TRAFFIC   100
-
-// --- Timing constraints (microseconds) ---
-#define MIN_CAR_ARRIVAL_US     0
-#define MAX_CAR_ARRIVAL_US     10000
-#define MIN_TRUCK_ARRIVAL_US   0
-#define MAX_TRUCK_ARRIVAL_US   1000
-
-
-typedef enum {
-    EX_SUCCESS,
-    EX_ERROR_ARGS,
-} ReturnCode;
-
-
-int parse_args(int argc, char const *argv[])
-{
-    if (argc != EXPECTED_ARGS)
-    {
-        // send to stderr
+// Function to parse arguments
+int parse_args(int argc, char const *argv[], Config *cfg) {
+    if (argc != EXPECTED_ARGS) {
         fprintf(stderr, "[ERROR:%d] Expected %d arguments, got %d\n",
-            EX_ERROR_ARGS, EXPECTED_ARGS, argc);
+                EX_ERROR_ARGS, EXPECTED_ARGS, argc);
         return EX_ERROR_ARGS;
     }
-    
-    for (int i = 1; i < argc; i++)
-    {
-        switch (i)
-        {
-        case 1:
-            atoi(argv[i]);
-            break;
-        case 2:
-            break;
-        case 3:
-            break;
-        case 4:
-            break;
-        case 5:
-            break;
-        case 6:
-            break;
-        }
+
+    char *end;
+
+    cfg->num_trucks = strtol(argv[1], &end, 10);
+    if (*end != '\0' || cfg->num_trucks < 0 || cfg->num_trucks > MAX_NUM_TRUCKS) {
+        fprintf(stderr, "[ERROR] Invalid number for num_trucks: %s\n", argv[1]);
+        return EX_ERROR_ARGS;
     }
+
+    cfg->num_cars = strtol(argv[2], &end, 10);
+    if (*end != '\0' || cfg->num_cars < 0 || cfg->num_cars > MAX_NUM_CARS) {
+        fprintf(stderr, "[ERROR] Invalid number for num_cars: %s\n", argv[2]);
+        return EX_ERROR_ARGS;
+    }
+
+    cfg->capacity = strtol(argv[3], &end, 10);
+    if (*end != '\0' || cfg->capacity < MIN_CAPACITY_TRAFFIC 
+        || cfg->capacity > MAX_CAPACITY_TRAFFIC) {
+        fprintf(stderr, "[ERROR] Invalid or out-of-range value for capacity: %s\n", argv[3]);
+        return EX_ERROR_ARGS;
+    }
+
+    cfg->max_car_arrival_us = strtol(argv[4], &end, 10);
+    if (*end != '\0' || cfg->max_car_arrival_us < MIN_CAR_ARRIVAL_US 
+        || cfg->max_car_arrival_us > MAX_CAR_ARRIVAL_US) {
+        fprintf(stderr, "[ERROR] Invalid or out-of-range value for max_car_arrival_us: %s\n", argv[4]);
+        return EX_ERROR_ARGS;
+    }
+
+    cfg->max_truck_arrival_us = strtol(argv[5], &end, 10);
+    if (*end != '\0' || cfg->max_truck_arrival_us < MIN_TRUCK_ARRIVAL_US
+         || cfg->max_truck_arrival_us > MAX_TRUCK_ARRIVAL_US) {
+        fprintf(stderr, "[ERROR] Invalid or out-of-range value for max_truck_arrival_us: %s\n", argv[5]);
+        return EX_ERROR_ARGS;
+    }
+
     return EX_SUCCESS;
 }
 
 
-int main(int argc, char const *argv[])
-{   
-    printf("Number of arguments: %d \n", argc);
-    printf("Argc value: %d \n", argc);
-    
-    for (int i = 0; i < argc; i++)
-    {
-        printf("\n %d. %s ",i, argv[i]);
-    }
-
-    printf("\n");
-
-    parse_args(argc, argv);
+int main(int argc, char const *argv[]) {
+    run_all_tests();
 
     return EX_SUCCESS;
-
 }
+

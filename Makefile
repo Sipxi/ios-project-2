@@ -4,14 +4,14 @@
 # Date: 18/05/2025
 
 # Compiler and flags
-CC          := gcc #! Change based on your complier, my is GCC
-#!CFLAGS      := -std=gnu99 -Wall -Wextra -Werror -pedantic
+CC          := gcc #! Change based on your compiler, mine is GCC
 CFLAGS      := -std=gnu99 -pedantic
 
 # Directories
 SRC_DIR     := src
 INC_DIR     := includes
 BUILD_DIR   := build
+TEST_DIR    := tests
 
 # OS Detection
 ifeq ($(OS),Windows_NT)
@@ -24,12 +24,15 @@ else
     RM = rm -rf $(BUILD_DIR)
 endif
 
+# Binaries
 BIN         := $(BUILD_DIR)/main$(EXE_SUFFIX)
 
 # Source and object files (use forward slashes here!)
 SRC         := $(wildcard $(SRC_DIR)/*.c)
-OBJ         := $(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/%.o, $(SRC))
+TEST_SRC    := $(wildcard $(TEST_DIR)/*.c)
 
+OBJ         := $(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/%.o, $(SRC))
+TEST_OBJ    := $(patsubst $(TEST_DIR)/%.c, $(BUILD_DIR)/%.o, $(TEST_SRC))
 # Targets
 .PHONY: all clean run test
 
@@ -41,17 +44,18 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	$(MKDIR)
 	$(CC) $(CFLAGS) -I$(INC_DIR) -c $< -o $@
 
-# Link object files into binary
-$(BIN): $(OBJ)
+# Compile test object files
+$(BUILD_DIR)/%.o: $(TEST_DIR)/%.c
+	$(MKDIR)
+	$(CC) $(CFLAGS) -I$(INC_DIR) -c $< -o $@
+
+# Link object files into main binary
+$(BIN): $(OBJ) $(TEST_OBJ)
 	$(CC) $(CFLAGS) $^ -o $@
 
 # Run the main program
 run: $(BIN)
 	$(BIN)
-
-# Run with test input
-test: $(BIN)
-	$(BIN) hline tests/obrazek.txt
 
 # Clean build directory
 clean:

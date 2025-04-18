@@ -1,0 +1,117 @@
+Test Results Log
+================
+
+Test: test_valid_args
+  Assertion: result == EX_SUCCESS
+  Expected:  0
+  Actual:    0
+  Result:    ✓ PASSED
+
+Test: test_invalid_arg_count_too_few
+  Assertion: result == EX_ERROR_ARGS
+  Expected:  1
+  Actual:    1
+  Result:    ✓ PASSED
+
+Test: test_invalid_arg_count_too_many
+  Assertion: result == EX_ERROR_ARGS
+  Expected:  1
+  Actual:    1
+  Result:    ✓ PASSED
+
+Test: test_invalid_num_trucks_negative
+  Assertion: result == EX_ERROR_ARGS
+  Expected:  1
+  Actual:    1
+  Result:    ✓ PASSED
+
+Test: test_invalid_num_trucks_exceeds_max
+  Assertion: result == EX_ERROR_ARGS
+  Expected:  1
+  Actual:    1
+  Result:    ✓ PASSED
+
+Test: test_invalid_num_cars_negative
+  Assertion: result == EX_ERROR_ARGS
+  Expected:  1
+  Actual:    1
+  Result:    ✓ PASSED
+
+Test: test_invalid_num_cars_exceeds_max
+  Assertion: result == EX_ERROR_ARGS
+  Expected:  1
+  Actual:    1
+  Result:    ✓ PASSED
+
+Test: test_invalid_capacity_below_min
+  Assertion: result == EX_ERROR_ARGS
+  Expected:  1
+  Actual:    1
+  Result:    ✓ PASSED
+
+Test: test_invalid_capacity_above_max
+  Assertion: result == EX_ERROR_ARGS
+  Expected:  1
+  Actual:    1
+  Result:    ✓ PASSED
+
+Test: test_invalid_max_car_arrival_us_below_min
+  Assertion: result == EX_ERROR_ARGS
+  Expected:  1
+  Actual:    1
+  Result:    ✓ PASSED
+
+Test: test_invalid_max_car_arrival_us_above_max
+  Assertion: result == EX_ERROR_ARGS
+  Expected:  1
+  Actual:    1
+  Result:    ✓ PASSED
+
+Test: test_invalid_max_truck_arrival_us_below_min
+  Assertion: result == EX_ERROR_ARGS
+  Expected:  1
+  Actual:    1
+  Result:    ✓ PASSED
+
+Test: test_invalid_max_truck_arrival_us_above_max
+  Assertion: result == EX_ERROR_ARGS
+  Expected:  1
+  Actual:    1
+  Result:    ✓ PASSED
+
+Test: test_edge_case_min_values
+  Assertion: result == EX_SUCCESS
+  Expected:  0
+  Actual:    0
+  Result:    ✓ PASSED
+
+Test: test_edge_case_max_values
+  Assertion: result == EX_SUCCESS
+  Expected:  0
+  Actual:    0
+  Result:    ✓ PASSED
+
+Test: test_extra_args
+  Assertion: result == EX_ERROR_ARGS
+  Expected:  1
+  Actual:    1
+  Result:    ✓ PASSED
+
+Test: test_missing_args
+  Assertion: result == EX_ERROR_ARGS
+  Expected:  1
+  Actual:    1
+  Result:    ✓ PASSED
+
+Test: test_invalid_arg_values
+  Assertion: result == EX_ERROR_ARGS
+  Expected:  1
+  Actual:    1
+  Result:    ✓ PASSED
+
+Test: test_invalid_num_args
+  Assertion: result == EX_ERROR_ARGS
+  Expected:  1
+  Actual:    1
+  Result:    ✓ PASSED
+
