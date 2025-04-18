@@ -4,7 +4,7 @@
 # Date: 18/05/2025
 
 # Compiler and flags
-CC          := gcc #! Change based on your compiler, mine is GCC
+CC          := gcc
 CFLAGS      := -std=gnu99 -pedantic
 
 # Directories
@@ -13,49 +13,43 @@ INC_DIR     := includes
 BUILD_DIR   := build
 TEST_DIR    := tests
 
-# OS Detection
-ifeq ($(OS),Windows_NT)
-    EXE_SUFFIX := .exe
-    MKDIR = if not exist $(BUILD_DIR) mkdir $(BUILD_DIR)
-    RM = if exist $(BUILD_DIR) rmdir /s /q $(BUILD_DIR)
-else
-    EXE_SUFFIX :=
-    MKDIR = mkdir -p $(BUILD_DIR)
-    RM = rm -rf $(BUILD_DIR)
-endif
+# File extensions
+EXE_SUFFIX  :=
+MKDIR       := mkdir -p $(BUILD_DIR)
+RM          := rm -rf $(BUILD_DIR)
 
 # Binaries
 BIN         := $(BUILD_DIR)/main$(EXE_SUFFIX)
 
-# Source and object files (use forward slashes here!)
+# Source and object files
 SRC         := $(wildcard $(SRC_DIR)/*.c)
 TEST_SRC    := $(wildcard $(TEST_DIR)/*.c)
 
 OBJ         := $(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/%.o, $(SRC))
 TEST_OBJ    := $(patsubst $(TEST_DIR)/%.c, $(BUILD_DIR)/%.o, $(TEST_SRC))
+
 # Targets
 .PHONY: all clean run test
 
-# Default build target
+# Default target
 all: $(BIN)
 
-# Compile object files
+# Build object files
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	$(MKDIR)
 	$(CC) $(CFLAGS) -I$(INC_DIR) -c $< -o $@
 
-# Compile test object files
 $(BUILD_DIR)/%.o: $(TEST_DIR)/%.c
 	$(MKDIR)
 	$(CC) $(CFLAGS) -I$(INC_DIR) -c $< -o $@
 
-# Link object files into main binary
+# Link objects
 $(BIN): $(OBJ) $(TEST_OBJ)
 	$(CC) $(CFLAGS) $^ -o $@
 
-# Run the main program
+# Run the program
 run: $(BIN)
-	$(BIN)
+	./$(BIN)
 
 # Clean build directory
 clean:
