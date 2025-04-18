@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <sys/mman.h>
+#include <sys/wait.h>
 #include <fcntl.h>
 #include <semaphore.h>
 #include <unistd.h>
