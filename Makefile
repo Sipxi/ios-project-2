@@ -5,7 +5,7 @@
 
 # Compiler and flags
 CC          := gcc
-CFLAGS      := -std=gnu99 -pedantic -fno-stack-protector
+CFLAGS      := -std=gnu99 -pedantic
 LDFLAGS     := -lc
 
 # Directories

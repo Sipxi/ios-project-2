@@ -3,7 +3,6 @@
 #include <stdio.h> // For printf
 #include <stdlib.h>
 #include <stdbool.h>
-#include "tests.h"
 #include "main.h"
 #include "logger.h"
 
