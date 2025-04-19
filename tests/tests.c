@@ -77,9 +77,9 @@ void test_valid_args() {
     ASSERT(result, EX_SUCCESS, "result == EX_SUCCESS");
     assert(cfg.num_trucks == 10);
     assert(cfg.num_cars == 20);
-    assert(cfg.capacity == 50);
-    assert(cfg.max_car_arrival_us == 500);
-    assert(cfg.max_truck_arrival_us == 1000);
+    assert(cfg.capacity_of_parcel == 50);
+    assert(cfg.max_vehicle_arrival_us == 500);
+    assert(cfg.max_parcel_arrival_us == 1000);
     printf("\033[32mTest '%s' passed.\033[0m\n", __func__); // Print success message in green
 }
 
@@ -186,9 +186,9 @@ void test_edge_case_min_values() {
     ASSERT(result,  EX_SUCCESS, "result == EX_SUCCESS");
     assert(cfg.num_trucks == 0);
     assert(cfg.num_cars == 0);
-    assert(cfg.capacity == 3);
-    assert(cfg.max_car_arrival_us == 0);
-    assert(cfg.max_truck_arrival_us == 0);
+    assert(cfg.capacity_of_parcel == 3);
+    assert(cfg.max_vehicle_arrival_us == 0);
+    assert(cfg.max_parcel_arrival_us == 0);
     printf("\033[32mTest '%s' passed.\033[0m\n", __func__); // Print success message in green
 }
 
@@ -199,9 +199,9 @@ void test_edge_case_max_values() {
     ASSERT(result,  EX_SUCCESS, "result == EX_SUCCESS");
     assert(cfg.num_trucks == 10000);
     assert(cfg.num_cars == 10000);
-    assert(cfg.capacity == 100);
-    assert(cfg.max_car_arrival_us == 10000);
-    assert(cfg.max_truck_arrival_us == 1000);
+    assert(cfg.capacity_of_parcel == 100);
+    assert(cfg.max_vehicle_arrival_us == 10000);
+    assert(cfg.max_parcel_arrival_us == 1000);
     printf("\033[32mTest '%s' passed.\033[0m\n", __func__); // Print success message in green
 }
 

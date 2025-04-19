@@ -23,30 +23,89 @@ int parse_args(int argc, char const *argv[], Config *cfg) {
         return EX_ERROR_ARGS;
     }
 
-    cfg->capacity = strtol(argv[3], &end, 10);
-    if (*end != '\0' || cfg->capacity < MIN_CAPACITY_TRAFFIC || cfg->capacity > MAX_CAPACITY_TRAFFIC) {
-        fprintf(stderr, "[ERROR] Invalid or out-of-range value for capacity: %s\n", argv[3]);
+    cfg->capacity_of_parcel = strtol(argv[3], &end, 10);
+    if (*end != '\0' || cfg->capacity_of_parcel < MIN_CAPACITY_PARCEL || cfg->capacity_of_parcel > MAX_CAPACITY_PARCEL) {
+        fprintf(stderr, "[ERROR] Invalid or out-of-range value for parcel capacity_of_parcel: %s\n", argv[3]);
         return EX_ERROR_ARGS;
     }
 
-    cfg->max_car_arrival_us = strtol(argv[4], &end, 10);
-    if (*end != '\0' || cfg->max_car_arrival_us < MIN_CAR_ARRIVAL_US || cfg->max_car_arrival_us > MAX_CAR_ARRIVAL_US) {
-        fprintf(stderr, "[ERROR] Invalid or out-of-range value for max_car_arrival_us: %s\n", argv[4]);
+    cfg->max_vehicle_arrival_us = strtol(argv[4], &end, 10);
+    if (*end != '\0' || cfg->max_vehicle_arrival_us < MIN_VEHICLE_ARRIVAL_US 
+        || cfg->max_vehicle_arrival_us > MAX_VEHICLE_ARRIVAL_US) {
+        fprintf(stderr, "[ERROR] Invalid or out-of-range value for vehicle_arrival_us: %s\n", argv[4]);
         return EX_ERROR_ARGS;
     }
 
-    cfg->max_truck_arrival_us = strtol(argv[5], &end, 10);
-    if (*end != '\0' || cfg->max_truck_arrival_us < MIN_TRUCK_ARRIVAL_US || cfg->max_truck_arrival_us > MAX_TRUCK_ARRIVAL_US) {
-        fprintf(stderr, "[ERROR] Invalid or out-of-range value for max_truck_arrival_us: %s\n", argv[5]);
+    cfg->max_parcel_arrival_us = strtol(argv[5], &end, 10);
+    if (*end != '\0' || cfg->max_parcel_arrival_us < MIN_PARCEL_ARRIVAL_US 
+        || cfg->max_parcel_arrival_us > MAX_PARCEL_ARRIVAL_US) {
+        fprintf(stderr, "[ERROR] Invalid or out-of-range value for min_parcel_arrival_us: %s\n", argv[5]);
         return EX_ERROR_ARGS;
     }
 
     return EX_SUCCESS;
 }
 
+
+//Dummy child logic
+void start_ferry() {
+    printf("Ferry: started\n");
+    usleep(100000); // simulate some work
+    printf("Ferry: finished\n");
+}
+
+void start_car(int id) {
+    srand(getpid() ^ time(NULL));  // Add this
+    int port = rand() % 2;
+    printf("Car %d: started, port %d\n", id, port);
+    usleep(100000);
+    printf("Car %d: done\n", id);
+}
+
+void start_truck(int id) {
+    srand(getpid() ^ time(NULL));  // Add this
+    int port = rand() % 2;
+    printf("Truck %d: started, port %d\n", id, port);
+    usleep(100000);
+    printf("Truck %d: done\n", id);
+}
+
+
+
+
 // Main function
 int main(int argc, char const *argv[]) {
-    
-    run_all_tests();
+    Config cfg;
+    if (parse_args(argc, argv, &cfg) != EX_SUCCESS) {
+        return EX_ERROR_ARGS;
+    }
+
+    srand(time(NULL)); // for port randomization
+
+    // Start ferry process
+    pid_t ferry_pid = fork();
+    if (ferry_pid == 0) {
+        start_ferry();
+        exit(0);
+    }
+
+    // Start N trucks
+    for (int i = 1; i <= cfg.num_trucks; i++) {
+        pid_t pid = fork();
+        if (pid == 0) {
+            start_truck(i);
+            exit(0);
+        }
+    }
+    for (int i = 1; i <= cfg.num_cars; i++) {
+        pid_t pid = fork();
+        if (pid == 0) {
+            start_car(i);
+            exit(0);
+        }
+    }
+
+    // Wait for all child processes
+    while (wait(NULL) > 0);
     return EX_SUCCESS;
 }
