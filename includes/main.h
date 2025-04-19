@@ -2,6 +2,7 @@
 // FIT VUT Student
 // https://github.com/sipxi
 // Date: 18/05/2025
+
 #ifndef MAIN_H
 #define MAIN_H
 #include <sys/mman.h>   // mmap
@@ -34,9 +35,7 @@
 
 typedef enum {
     EX_SUCCESS,
-    EX_ERROR_ARGS,
-    EX_ERROR_INIT,
-    EX_ERROR_FORK,
+    EX_ERROR
 } ReturnCode;
 
 // Configuration structure

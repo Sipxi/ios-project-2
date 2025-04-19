@@ -43,7 +43,7 @@ void test_invalid_num_args() {
     const char *argv[] = {"program", "10", "20", "50", "500"};
     Config cfg;
     int result = parse_args(5, argv, &cfg);
-    ASSERT(result, EX_ERROR_ARGS, "result == EX_ERROR_ARGS");
+    ASSERT(result, EX_ERROR, "result == EX_ERROR");
     printf("\033[32mTest '%s' passed.\033[0m\n", __func__); // Print success message in green
 }
 
@@ -51,14 +51,14 @@ void test_invalid_arg_values() {
     const char *argv[] = {"program", "abc", "20", "50", "500", "1000"};
     Config cfg;
     int result = parse_args(6, argv, &cfg);
-    ASSERT(result, EX_ERROR_ARGS, "result == EX_ERROR_ARGS");
+    ASSERT(result, EX_ERROR, "result == EX_ERROR");
 }
 
 void test_missing_args() {
     const char *argv[] = {"program", "10", "20", "50", "500"};
     Config cfg;
     int result = parse_args(5, argv, &cfg);
-    ASSERT(result, EX_ERROR_ARGS, "result == EX_ERROR_ARGS");
+    ASSERT(result, EX_ERROR, "result == EX_ERROR");
     printf("\033[32mTest '%s' passed.\033[0m\n", __func__); // Print success message in green
 }
 
@@ -66,7 +66,7 @@ void test_extra_args() {
     const char *argv[] = {"program", "10", "20", "50", "500", "1000", "extra"};
     Config cfg;
     int result = parse_args(7, argv, &cfg);
-    ASSERT(result, EX_ERROR_ARGS, "result == EX_ERROR_ARGS");
+    ASSERT(result, EX_ERROR, "result == EX_ERROR");
     printf("\033[32mTest '%s' passed.\033[0m\n", __func__); // Print success message in green
 }
 
@@ -87,7 +87,7 @@ void test_invalid_arg_count_too_few() {
     const char *argv[] = {"program", "10", "20", "50", "500"};
     Config cfg;
     int result = parse_args(5, argv, &cfg); // Too few arguments
-    ASSERT(result, EX_ERROR_ARGS, "result == EX_ERROR_ARGS");
+    ASSERT(result, EX_ERROR, "result == EX_ERROR");
     printf("\033[32mTest '%s' passed.\033[0m\n", __func__); // Print success message in green
 }
 
@@ -95,7 +95,7 @@ void test_invalid_arg_count_too_many() {
     const char *argv[] = {"program", "10", "20", "50", "500", "1000", "extra"};
     Config cfg;
     int result = parse_args(7, argv, &cfg); // Too many arguments
-    ASSERT(result, EX_ERROR_ARGS, "result == EX_ERROR_ARGS");
+    ASSERT(result, EX_ERROR, "result == EX_ERROR");
     printf("\033[32mTest '%s' passed.\033[0m\n", __func__); // Print success message in green
 }
 
@@ -103,7 +103,7 @@ void test_invalid_num_trucks_negative() {
     const char *argv[] = {"program", "-10", "20", "50", "500", "1000"};
     Config cfg;
     int result = parse_args(6, argv, &cfg);
-    ASSERT(result, EX_ERROR_ARGS, "result == EX_ERROR_ARGS");
+    ASSERT(result, EX_ERROR, "result == EX_ERROR");
     printf("\033[32mTest '%s' passed.\033[0m\n", __func__); // Print success message in green
 }
 
@@ -111,7 +111,7 @@ void test_invalid_num_trucks_exceeds_max() {
     const char *argv[] = {"program", "10001", "20", "50", "500", "1000"};
     Config cfg;
     int result = parse_args(6, argv, &cfg);
-    ASSERT(result,  EX_ERROR_ARGS, "result == EX_ERROR_ARGS");
+    ASSERT(result,  EX_ERROR, "result == EX_ERROR");
     printf("\033[32mTest '%s' passed.\033[0m\n", __func__); // Print success message in green
 }
 
@@ -119,7 +119,7 @@ void test_invalid_num_cars_negative() {
     const char *argv[] = {"program", "10", "-20", "50", "500", "1000"};
     Config cfg;
     int result = parse_args(6, argv, &cfg);
-    ASSERT(result,  EX_ERROR_ARGS, "result == EX_ERROR_ARGS");
+    ASSERT(result,  EX_ERROR, "result == EX_ERROR");
     printf("\033[32mTest '%s' passed.\033[0m\n", __func__); // Print success message in green
 }
 
@@ -127,7 +127,7 @@ void test_invalid_num_cars_exceeds_max() {
     const char *argv[] = {"program", "10", "10001", "50", "500", "1000"};
     Config cfg;
     int result = parse_args(6, argv, &cfg);
-    ASSERT(result,  EX_ERROR_ARGS, "result == EX_ERROR_ARGS");
+    ASSERT(result,  EX_ERROR, "result == EX_ERROR");
     printf("\033[32mTest '%s' passed.\033[0m\n", __func__); // Print success message in green
 }
 
@@ -135,7 +135,7 @@ void test_invalid_capacity_below_min() {
     const char *argv[] = {"program", "10", "20", "2", "500", "1000"};
     Config cfg;
     int result = parse_args(6, argv, &cfg);
-    ASSERT(result,  EX_ERROR_ARGS, "result == EX_ERROR_ARGS");
+    ASSERT(result,  EX_ERROR, "result == EX_ERROR");
     printf("\033[32mTest '%s' passed.\033[0m\n", __func__); // Print success message in green
 }
 
@@ -143,7 +143,7 @@ void test_invalid_capacity_above_max() {
     const char *argv[] = {"program", "10", "20", "101", "500", "1000"};
     Config cfg;
     int result = parse_args(6, argv, &cfg);
-    ASSERT(result,  EX_ERROR_ARGS, "result == EX_ERROR_ARGS");
+    ASSERT(result,  EX_ERROR, "result == EX_ERROR");
     printf("\033[32mTest '%s' passed.\033[0m\n", __func__); // Print success message in green
 }
 
@@ -151,7 +151,7 @@ void test_invalid_max_car_arrival_us_below_min() {
     const char *argv[] = {"program", "10", "20", "50", "-1", "1000"};
     Config cfg;
     int result = parse_args(6, argv, &cfg);
-    ASSERT(result, EX_ERROR_ARGS, "result == EX_ERROR_ARGS");
+    ASSERT(result, EX_ERROR, "result == EX_ERROR");
     printf("\033[32mTest '%s' passed.\033[0m\n", __func__); // Print success message in green
 }
 
@@ -159,7 +159,7 @@ void test_invalid_max_car_arrival_us_above_max() {
     const char *argv[] = {"program", "10", "20", "50", "10001", "1000"};
     Config cfg;
     int result = parse_args(6, argv, &cfg);
-    ASSERT(result,  EX_ERROR_ARGS, "result == EX_ERROR_ARGS");
+    ASSERT(result,  EX_ERROR, "result == EX_ERROR");
     printf("\033[32mTest '%s' passed.\033[0m\n", __func__); // Print success message in green
 }
 
@@ -167,7 +167,7 @@ void test_invalid_max_truck_arrival_us_below_min() {
     const char *argv[] = {"program", "10", "20", "50", "500", "-1"};
     Config cfg;
     int result = parse_args(6, argv, &cfg);
-    ASSERT(result,  EX_ERROR_ARGS, "result == EX_ERROR_ARGS");
+    ASSERT(result,  EX_ERROR, "result == EX_ERROR");
     printf("\033[32mTest '%s' passed.\033[0m\n", __func__); // Print success message in green
 }
 
@@ -175,7 +175,7 @@ void test_invalid_max_truck_arrival_us_above_max() {
     const char *argv[] = {"program", "10", "20", "50", "500", "1001"};
     Config cfg;
     int result = parse_args(6, argv, &cfg);
-    ASSERT(result,  EX_ERROR_ARGS, "result == EX_ERROR_ARGS");
+    ASSERT(result,  EX_ERROR, "result == EX_ERROR");
     printf("\033[32mTest '%s' passed.\033[0m\n", __func__); // Print success message in green
 }
 

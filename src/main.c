@@ -5,48 +5,46 @@
 // Time spent: 15h
 #include "main.h"
 
-//TODO: Exit code should be only 0 or 1
-
 // Function to parse arguments
 int parse_args(int argc, char const *argv[], Config *cfg) {
     if (argc != EXPECTED_ARGS) {
-        fprintf(stderr, "[ERROR:%d] Expected %d arguments, got %d\n",
-                EX_ERROR_ARGS, EXPECTED_ARGS, argc);
-        return EX_ERROR_ARGS;
+        fprintf(stderr, "[ERROR] Expected %d arguments, got %d\n",
+                EXPECTED_ARGS, argc);
+        return EX_ERROR;
     }
 
     char *end;
 
     cfg->num_trucks = strtol(argv[1], &end, 10);
     if (*end != '\0' || cfg->num_trucks < 0 || cfg->num_trucks > MAX_NUM_TRUCKS) {
-        fprintf(stderr, "[ERROR:%d] Invalid number for num_trucks: %s\n", EX_ERROR_ARGS,argv[1]);
-        return EX_ERROR_ARGS;
+        fprintf(stderr, "[ERROR] Invalid number for num_trucks: %s\n",argv[1]);
+        return EX_ERROR;
     }
 
     cfg->num_cars = strtol(argv[2], &end, 10);
     if (*end != '\0' || cfg->num_cars < 0 || cfg->num_cars > MAX_NUM_CARS) {
-        fprintf(stderr, "[ERROR:%d] Invalid number for num_cars: %s\n",EX_ERROR_ARGS, argv[2]);
-        return EX_ERROR_ARGS;
+        fprintf(stderr, "[ERROR] Invalid number for num_cars: %s\n", argv[2]);
+        return EX_ERROR;
     }
 
     cfg->capacity_of_ferry = strtol(argv[3], &end, 10);
     if (*end != '\0' || cfg->capacity_of_ferry < MIN_CAPACITY_PARCEL || cfg->capacity_of_ferry > MAX_CAPACITY_PARCEL) {
-        fprintf(stderr, "[ERROR:%d] Invalid or out-of-range value for parcel capacity_of_ferry: %s\n",EX_ERROR_ARGS, argv[3]);
-        return EX_ERROR_ARGS;
+        fprintf(stderr, "[ERROR] Invalid or out-of-range value for parcel capacity_of_ferry: %s\n", argv[3]);
+        return EX_ERROR;
     }
 
     cfg->max_vehicle_arrival_us = strtol(argv[4], &end, 10);
     if (*end != '\0' || cfg->max_vehicle_arrival_us < MIN_VEHICLE_ARRIVAL_US 
         || cfg->max_vehicle_arrival_us > MAX_VEHICLE_ARRIVAL_US) {
-        fprintf(stderr, "[ERROR:%d] Invalid or out-of-range value for vehicle_arrival_us: %s\n",EX_ERROR_ARGS, argv[4]);
-        return EX_ERROR_ARGS;
+        fprintf(stderr, "[ERROR] Invalid or out-of-range value for vehicle_arrival_us: %s\n", argv[4]);
+        return EX_ERROR;
     }
 
     cfg->max_ferry_arrival_us = strtol(argv[5], &end, 10);
     if (*end != '\0' || cfg->max_ferry_arrival_us < MIN_FERRY_ARRIVAL_US 
         || cfg->max_ferry_arrival_us > MAX_FERRY_ARRIVAL_US) {
-        fprintf(stderr, "[ERROR:%d] Invalid or out-of-range value for min_parcel_arrival_us: %s\n",EX_ERROR_ARGS, argv[5]);
-        return EX_ERROR_ARGS;
+        fprintf(stderr, "[ERROR] Invalid or out-of-range value for min_parcel_arrival_us: %s\n", argv[5]);
+        return EX_ERROR;
     }
 
     return EX_SUCCESS;
@@ -55,18 +53,18 @@ int parse_args(int argc, char const *argv[], Config *cfg) {
 SharedData *init_shared_data(Config cfg) {
     SharedData *shared_data = mmap(NULL, sizeof(SharedData), PROT_READ | PROT_WRITE, MAP_SHARED | MAP_ANONYMOUS, 0, 0);
     if (shared_data == MAP_FAILED) {
-        fprintf(stderr, "[ERROR:%d] mmap failed\n", EX_ERROR_INIT);
+        fprintf(stderr, "[ERROR:%d] mmap failed\n", EX_ERROR);
         return NULL;
     }
         // Initialize semaphores
     shared_data->action_counter_sem = sem_open("/action_counter_sem", O_CREAT, 0644, 1);
     if (shared_data->action_counter_sem == SEM_FAILED) {
-        fprintf(stderr, "[ERROR:%d] sem_open failed for action_counter_sem\n", EX_ERROR_INIT);
+        fprintf(stderr, "[ERROR:%d] sem_open failed for action_counter_sem\n", EX_ERROR);
         return NULL;
     }
     shared_data->ferry_sem = sem_open("/ferry_sem", O_CREAT, 0644, 1);
     if (shared_data->ferry_sem == SEM_FAILED) {
-        fprintf(stderr, "[ERROR:%d] sem_open failed for ferry_sem\n", EX_ERROR_INIT);
+        fprintf(stderr, "[ERROR:%d] sem_open failed for ferry_sem\n", EX_ERROR);
         return NULL;
     }
     shared_data->action_counter = 1;
@@ -109,11 +107,11 @@ void create_ferry_process(SharedData *shared_data, Config cfg){
     if (ferry_pid == 0){
         // Ferry process
         ferry_process(shared_data, cfg);
-        exit(0);
+        exit(EX_SUCCESS);
     }
     else if (ferry_pid < 0){
         fprintf(stderr, "[ERROR] fork failed\n");
-        exit(1);
+        exit(EXIT_FAILURE);
     }
     
 }
@@ -127,10 +125,10 @@ void create_vehicle_process(SharedData *shared_data, Config cfg, const char vehi
             int port = rand() % 2;
             print_action(shared_data, vehicle_type, i + 1, "started", port);
             vehicle_process(shared_data, i + 1, port, cfg, vehicle_type);  // Process vehicle
-            exit(0);
+            exit(EX_SUCCESS);
         } else if (vehicle_pid < 0) {
             fprintf(stderr, "[ERROR] fork failed\n");
-            exit(1);
+            exit(EX_ERROR);
         }
     }
 }
@@ -141,19 +139,19 @@ int cleanup(SharedData *shared_data) {
     // Close and unlink semaphores
     if (sem_close(shared_data->action_counter_sem) == -1) {
         fprintf(stderr, "[ERROR] sem_close failed for action_counter_sem\n");
-        return 1;
+        return EX_ERROR;
     }
-
     if (sem_unlink("/action_counter_sem") == -1) {
         fprintf(stderr, "[ERROR] sem_unlink failed for action_counter_sem\n");
-        return 1;
+        return EX_ERROR;
     }
     if (sem_close(shared_data->ferry_sem) == -1) {
         fprintf(stderr, "[ERROR] sem_close failed for ferry_sem\n");
+        return EX_ERROR;
     }
-
     if (sem_unlink("/ferry_sem") == -1) {
         fprintf(stderr, "[ERROR] sem_unlink failed for ferry_sem\n");
+        return EX_ERROR;
     }
     return EX_SUCCESS;
 }
@@ -179,12 +177,12 @@ void print_shared_data(SharedData *shared_data) {
 int main(int argc, char const *argv[]) {
     Config cfg;
     if (parse_args(argc, argv, &cfg) != EX_SUCCESS) {
-        return EX_ERROR_ARGS;
+        return EX_ERROR;
     }
 
     SharedData *shared_data = init_shared_data(cfg);
     if (shared_data == NULL) {
-        return EX_ERROR_INIT;
+        return EX_ERROR;
     }
     srand(time(NULL));  // Initialize random number generator for random port assignment
 
@@ -205,7 +203,7 @@ int main(int argc, char const *argv[]) {
 
     // 6. Clean up
     if (cleanup != EX_SUCCESS){
-        return 0;
+        return EX_ERROR;
     }
 
     printf("\n \033[32mEverything done successfully.\033[0m\n");
