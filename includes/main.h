@@ -1,3 +1,7 @@
+// Author: Serhij Čepil (sipxi)
+// FIT VUT Student
+// https://github.com/sipxi
+// Date: 18/05/2025
 #ifndef MAIN_H
 #define MAIN_H
 #include <sys/mman.h>   // mmap
@@ -7,6 +11,8 @@
 #include <sys/types.h> // pid_t
 #include <time.h> // for rand
 #include <sys/wait.h> // wait
+#include <semaphore.h> // sem_t
+#include <fcntl.h>  // For O_CREAT, O_EXCL, etc.
 // --- Argument count ---
 #define EXPECTED_ARGS 6
 
@@ -51,22 +57,26 @@ typedef struct {
     int waiting_cars[2];      // Number of cars waiting at each port
     int loaded_trucks;        // Number of trucks currently on the ferry
     int loaded_cars;          // Number of cars currently on the ferry
+    sem_t *action_counter_sem;    // Semaphore for synchronizing action_counter
+    sem_t *ferry_sem;
 } SharedData;
 
 
 SharedData *init_shared_data(Config cfg);
 int parse_args(int argc, char const *argv[], Config *cfg);
+int rand_range(int min, int max);
+
+void print_action(SharedData *shared_data, const char vehicle_type, int vehicle_id, const char *action, int port);
+void print_shared_data(SharedData *shared_data);
 
 
-void ferry_procces();
+void ferry_procces(SharedData *shared_data, Config cfg);
+void vehicle_process(SharedData *shared_data, int vehicle_id, int port, Config cfg, const char vehicle_type);
 
-void car_procces(int car_id, int port);
-void truck_procces(int truck_id, int port);
 void create_ferry_process(SharedData *shared_data, Config cfg);
-void create_car_process(SharedData *shared_data, Config cfg);
-void create_truck_process(SharedData *shared_data, Config cfg);
-void wait_for_children();
+void create_vehicle_process(SharedData *shared_data, Config cfg, const char vehicle_type);
 
+void wait_for_children();
 
 
 #endif
