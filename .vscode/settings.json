@@ -3,6 +3,7 @@
         "stdio.h": "c",
         "main.h": "c",
         "time.h": "c",
-        "fcntl.h": "c"
+        "fcntl.h": "c",
+        "stdlib.h": "c"
     }
 }

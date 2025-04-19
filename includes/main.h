@@ -1,16 +1,12 @@
 #ifndef MAIN_H
 #define MAIN_H
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/wait.h>
-#include <time.h>
-#include <errno.h>
-#include "tests.h"
-
-
-
-#define MAX_CHILDREN 20000
+#include <sys/mman.h>   // mmap
+#include <stdio.h> // input output
+#include <stdlib.h> //stol
+#include <unistd.h> // sleep
+#include <sys/types.h> // pid_t
+#include <time.h> // for rand
+#include <sys/wait.h> // wait
 // --- Argument count ---
 #define EXPECTED_ARGS 6
 
@@ -33,16 +29,19 @@
 typedef enum {
     EX_SUCCESS,
     EX_ERROR_ARGS,
+    EX_ERROR_INIT,
+    EX_ERROR_FORK,
 } ReturnCode;
 
 // Configuration structure
 typedef struct {
     int num_trucks;
     int num_cars;
-    int capacity_of_parcel;
+    int capacity_of_ferry;
     int max_vehicle_arrival_us;
-    int max_parcel_arrival_us;
+    int max_ferry_arrival_us;
 } Config;
+
 
 typedef struct {
     int action_counter;       // Global action counter (A)
@@ -54,6 +53,20 @@ typedef struct {
     int loaded_cars;          // Number of cars currently on the ferry
 } SharedData;
 
+
+SharedData *init_shared_data(Config cfg);
 int parse_args(int argc, char const *argv[], Config *cfg);
+
+
+void ferry_procces();
+
+void car_procces(int car_id, int port);
+void truck_procces(int truck_id, int port);
+void create_ferry_process(SharedData *shared_data, Config cfg);
+void create_car_process(SharedData *shared_data, Config cfg);
+void create_truck_process(SharedData *shared_data, Config cfg);
+void wait_for_children();
+
+
 
 #endif

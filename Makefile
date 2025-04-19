@@ -28,7 +28,7 @@ TEST_OBJ    := $(patsubst $(TEST_DIR)/%.c, $(BUILD_DIR)/%.o, $(TEST_SRC))
 .PHONY: all clean run
 
 # Default build target
-all: $(BIN)
+all: clean $(BIN)
 
 # Compile object files
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
@@ -45,8 +45,8 @@ $(BIN): $(OBJ) $(TEST_OBJ)
 	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
 
 # Run the main program
-run: $(BIN)
-	./$(BIN)
+run: clean $(BIN)
+	./$(BIN) 4 4 10 10 10
 
 # Clean build directory
 clean:
