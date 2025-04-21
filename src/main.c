@@ -2,7 +2,7 @@
 // FIT VUT Student
 // https://github.com/sipxi
 // Date: 18/05/2025
-// Time spent: 15h
+// Time spent: 30h
 
 #include "main.h"
 
@@ -232,14 +232,14 @@ void ferry_process(SharedData *shared_data, Config cfg) {
 
 
     while (1) {
-        printf("Waiting for vehicles to unload...\n");
+        //printf("Waiting for vehicles to unload...\n");
         if (shared_data->vehicles_to_unload > 0) {
             unload_vehicles(shared_data, cfg);  // signal vehicles to unload
             // Wait until all of them reported back
-            printf("Waiting for everybody to unload...\n");
+            //printf("Waiting for everybody to unload...\n");
             sem_wait(&shared_data->unload_complete_sem);
         }
-        printf("All vehicles unloaded\n");
+        //printf("All vehicles unloaded\n");
 
         // reset counters
         sem_wait(&shared_data->protection_mutex);
@@ -247,7 +247,7 @@ void ferry_process(SharedData *shared_data, Config cfg) {
         shared_data->loaded_trucks = 0;
         sem_post(&shared_data->protection_mutex);
 
-        printf("Reset counters\n");
+        //printf("Reset counters\n");
 
         printf("Port %d is ready for loading\n", shared_data->ferry_port);
         //ferry ready for loading
@@ -279,7 +279,7 @@ void vehicle_process(SharedData *shared_data, Config cfg, char vehicle_type,
     sem_post(&shared_data->protection_mutex);
 
     // Wait for ferry to be ready in specific port
-    printf("ID: %d Waiting for port %d \n", id, port);
+    //printf("ID: %d Waiting for port %d \n", id, port);
     sem_wait(&shared_data->port_ready[port]);
 
     // Now I'm loading...
@@ -289,11 +289,12 @@ void vehicle_process(SharedData *shared_data, Config cfg, char vehicle_type,
     } else {
         shared_data->loaded_cars++;
     }
-    sem_post(&shared_data->protection_mutex);
     print_action(shared_data, vehicle_type, id, "loading", port);
+    sem_post(&shared_data->protection_mutex);
+
 
     // Wait until ferry says "go ahead"
-    printf("ID: %d Waiting for unloading \n", id);
+    //printf("ID: %d Waiting for unloading \n", id);
     sem_wait(&shared_data->unload_vehicle);
 
     // Now I'm unloading...
