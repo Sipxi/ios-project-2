@@ -57,36 +57,17 @@ typedef struct {
     int loaded_trucks;        // Number of trucks currently on the ferry
     int loaded_cars;          // Number of cars currently on the ferry
     sem_t *action_counter_sem;    // Semaphore for synchronizing action counter
-    sem_t *waiting_cars_sem;
-    sem_t *vehicle_loaded_sem;
-    sem_t *vehicle_unloaded_sem;
-    sem_t *unload_vehicle_sem[2];
-    sem_t *port_ready_sem[2];     // Semaphore for synchronizing port readiness
-    sem_t *unload_complete[2];          // Semaphore for synchronizing ferry loading
-    sem_t *unloaded_from_ferry;
-    sem_t *load_car;
-    sem_t *load_truck;
 } SharedData;
 
 
 SharedData *init_shared_data(Config cfg);
 int parse_args(int argc, char const *argv[], Config *cfg);
 int rand_range(int min, int max);
-int remaining_cars_to_load();
 
-void add_to_queue(SharedData *shared_data, const char vehicle_type, int port);
-void load_vehicle_on_ferry(SharedData *shared_data, const char vehicle_type, int port);
-void unload_vehicle_from_ferry(SharedData *shared_data, const char vehicle_type, int port);
-int unload_all_vehicles(SharedData *shared_data);
 
-int no_more_vehicles_to_transport(SharedData *shared_data, Config cfg);
 
 void print_action(SharedData *shared_data, const char vehicle_type, int vehicle_id, const char *action, int port);
 void print_shared_data(SharedData *shared_data);
-
-
-void ferry_procces(SharedData *shared_data, Config cfg);
-void vehicle_process(SharedData *shared_data, int vehicle_id, int port, Config cfg, const char vehicle_type);
 
 void create_ferry_process(SharedData *shared_data, Config cfg);
 void create_vehicle_process(SharedData *shared_data, Config cfg, const char vehicle_type);
