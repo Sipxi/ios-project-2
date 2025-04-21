@@ -12,7 +12,6 @@
 #include <time.h> // for rand
 #include <sys/wait.h> // wait
 #include <semaphore.h> // sem_t
-#include <fcntl.h>  // For O_CREAT, O_EXCL, etc.
 #include <stdbool.h>
 // --- Argument count ---
 #define EXPECTED_ARGS 6
@@ -31,12 +30,9 @@
 #define MIN_FERRY_ARRIVAL_US   0
 #define MAX_FERRY_ARRIVAL_US   1000
 
-
-
-typedef enum {
-    EX_SUCCESS,
-    EX_ERROR
-} ReturnCode;
+// --- Constants ---
+#define TRUCK_SIZE 3
+#define CAR_SIZE 1
 
 // Configuration structure
 typedef struct {
@@ -56,7 +52,16 @@ typedef struct {
     int waiting_cars[2];      // Number of cars waiting at each port
     int loaded_trucks;        // Number of trucks currently on the ferry
     int loaded_cars;          // Number of cars currently on the ferry
-    sem_t *action_counter_sem;    // Semaphore for synchronizing action counter
+    int vehicles_to_unload;   // Number of vehicles to unload
+    int vehicles_unloaded;
+    int next_vehicle_is_truck;
+    sem_t action_counter_sem;    // Semaphore for synchronizing action counter
+    sem_t unload_vehicle;
+    sem_t protection_mutex;
+    sem_t unload_complete_sem;     // ferry waits on this
+    sem_t load_truck;
+    sem_t load_car;
+    sem_t port_ready[2];
 } SharedData;
 
 
@@ -69,6 +74,8 @@ int rand_range(int min, int max);
 void print_action(SharedData *shared_data, const char vehicle_type, int vehicle_id, const char *action, int port);
 void print_shared_data(SharedData *shared_data);
 
+void vehicle_process(SharedData *shared_data, Config cfg, char vehicle_type, int id, int port);
+void ferry_process(SharedData *shared_data, Config cfg); 
 void create_ferry_process(SharedData *shared_data, Config cfg);
 void create_vehicle_process(SharedData *shared_data, Config cfg, const char vehicle_type);
 
