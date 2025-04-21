@@ -69,23 +69,6 @@ SharedData *init_shared_data(Config cfg) {
         fprintf(stderr, "[ERROR] mmap failed\n");
         return NULL;
     }
-    // Initialize semaphores
-    shared_data->ferry_loaded_sem =
-        sem_open("/ferry_loaded_sem", O_CREAT, 0644, 0);
-    if (shared_data->ferry_loaded_sem == SEM_FAILED) {
-        fprintf(stderr,
-                "[ERROR] Failed to open semaphore: /ferry_loaded_sem\n");
-        return NULL;
-    }
-    // Initialize semaphores
-    shared_data->ferry_arrived_sem =
-        sem_open("/ferry_arrived_sem", O_CREAT, 0644, 0);
-    if (shared_data->ferry_arrived_sem == SEM_FAILED) {
-        fprintf(stderr,
-                "[ERROR] Failed to open semaphore: /ferry_arrived_sem\n");
-        return NULL;
-    }
-    // Initialize semaphores
     shared_data->action_counter_sem =
         sem_open("/action_counter_sem", O_CREAT, 0644, 1);
     if (shared_data->action_counter_sem == SEM_FAILED) {
@@ -93,30 +76,89 @@ SharedData *init_shared_data(Config cfg) {
                 "[ERROR] Failed to open semaphore: /action_counter_sem\n");
         return NULL;
     }
-    shared_data->vehicle_unload_sem =
-        sem_open("/vehicle_unload_sem", O_CREAT, 0644, 0);
-    if (shared_data->vehicle_unload_sem == SEM_FAILED) {
+
+    shared_data->waiting_cars_sem =
+        sem_open("/waiting_cars_sem", O_CREAT, 0644, 1);
+    if (shared_data->waiting_cars_sem == SEM_FAILED) {
         fprintf(stderr,
-                "[ERROR] Failed to open semaphore: /vehicle_unload_sem\n");
+                "[ERROR] Failed to open semaphore: /waiting_cars_sem\n");
         return NULL;
     }
-    shared_data->helper_sem = sem_open("/helper_sem", O_CREAT, 0644, 1);
-    if (shared_data->helper_sem == SEM_FAILED) {
+
+    // Initialize semaphores
+    shared_data->vehicle_loaded_sem =
+        sem_open("/vehicle_loaded_sem", O_CREAT, 0644, 0);
+    if (shared_data->vehicle_loaded_sem == SEM_FAILED) {
         fprintf(stderr,
-                "[ERROR] Failed to open semaphore: /vehicle_unload_sem\n");
+                "[ERROR] Failed to open semaphore: /vehicle_loaded_sem\n");
+        return NULL;
+    }
+    // Initialize semaphores
+    shared_data->vehicle_unloaded_sem =
+        sem_open("/vehicle_unloaded_sem", O_CREAT, 0644, 0);
+    if (shared_data->vehicle_unloaded_sem == SEM_FAILED) {
+        fprintf(stderr,
+                "[ERROR] Failed to open semaphore: /vehicle_unloaded_sem\n");
+        return NULL;
+    }
+    shared_data->unload_vehicle_sem[0] =
+        sem_open("/unload_vehicle_sem_0", O_CREAT, 0644, 0);
+    if (shared_data->unload_vehicle_sem[0] == SEM_FAILED) {
+        fprintf(stderr,
+                "[ERROR] Failed to open semaphore: /unload_vehicle_sem_0\n");
+        return NULL;
+    }
+
+    shared_data->unload_vehicle_sem[1] =
+        sem_open("/unload_vehicle_sem_1", O_CREAT, 0644, 0);
+    if (shared_data->unload_vehicle_sem[1] == SEM_FAILED) {
+        fprintf(stderr,
+                "[ERROR] Failed to open semaphore: /unload_vehicle_sem_1\n");
+        return NULL;
+    }
+    shared_data->unload_complete[0] =
+        sem_open("/unload_complete_0", O_CREAT, 0644, 0);
+    if (shared_data->unload_complete[0] == SEM_FAILED) {
+        fprintf(stderr,
+                "[ERROR] Failed to open semaphore: /unload_complete_0\n");
+        return NULL;
+    }
+    shared_data->unload_complete[1] =
+        sem_open("/unload_complete_1", O_CREAT, 0644, 0);
+    if (shared_data->unload_complete[1] == SEM_FAILED) {
+        fprintf(stderr,
+                "[ERROR] Failed to open semaphore: /unload_complete_1\n");
         return NULL;
     }
     shared_data->port_ready_sem[0] =
         sem_open("/port_ready_sem_0", O_CREAT, 0644, 0);
     if (shared_data->port_ready_sem[0] == SEM_FAILED) {
-        fprintf(stderr, "[ERROR] Failed to open semaphore: /ferry_sem\n");
+        fprintf(stderr,
+                "[ERROR] Failed to open semaphore: /port_ready_sem_0\n");
         return NULL;
     }
     shared_data->port_ready_sem[1] =
         sem_open("/port_ready_sem_1", O_CREAT, 0644, 0);
     if (shared_data->port_ready_sem[1] == SEM_FAILED) {
         fprintf(stderr,
-                "[ERROR] Failed to open semaphore: //port_ready_sem_1\n");
+                "[ERROR] Failed to open semaphore: /port_ready_sem_1\n");
+        return NULL;
+    }
+    shared_data->unloaded_from_ferry =
+        sem_open("/unloaded_from_ferry", O_CREAT, 0644, 1);
+    if (shared_data->unloaded_from_ferry == SEM_FAILED) {
+        fprintf(stderr,
+                "[ERROR] Failed to open semaphore: /unloaded_from_ferry\n");
+        return NULL;
+    }
+    shared_data->load_car = sem_open("/load_car", O_CREAT, 0644, 1);
+    if (shared_data->load_car == SEM_FAILED) {
+        fprintf(stderr, "[ERROR] Failed to open semaphore: /load_car\n");
+        return NULL;
+    }
+    shared_data->load_truck = sem_open("/load_truck", O_CREAT, 0644, 1);
+    if (shared_data->load_truck == SEM_FAILED) {
+        fprintf(stderr, "[ERROR] Failed to open semaphore: /load_truck\n");
         return NULL;
     }
 
@@ -133,7 +175,7 @@ SharedData *init_shared_data(Config cfg) {
 }
 
 int no_more_vehicles_to_transport(SharedData *shared_data, Config cfg) {
-    return false;
+    return 0;
 }
 
 int rand_range(int min, int max) {
@@ -149,102 +191,194 @@ void print_action(SharedData *shared_data, const char vehicle_type, int id,
     sem_post(shared_data->action_counter_sem);
 }
 
+int remaining_cars_to_load() {
+    return 0;
+}
+
+
+int unload_all_vehicles(SharedData *shared_data) {
+    int unloaded_vehicles = 0;
+    for (int i = 0; i < shared_data->loaded_cars + shared_data->loaded_trucks; i++) {
+
+        sem_post(shared_data->unload_vehicle_sem[shared_data->ferry_port]);
+
+        sem_wait(shared_data->vehicle_unloaded_sem);
+        unloaded_vehicles++;
+
+    }
+    return unloaded_vehicles;
+}
+
+void ferry_to_another_port(SharedData *shared_data){
+    print_action(shared_data, 'P', 0, "leaving", shared_data->ferry_port);
+    shared_data->ferry_port = (shared_data->ferry_port + 1) % 2;
+
+}
+
+// void load_ferry(Config cfg, SharedData *shared_data) {
+//     int space_used = 0;
+//     int load_truck_next = 1; // Start with truck
+
+//     while (space_used < cfg.capacity_of_ferry) {
+//         if (load_truck_next) {
+//             if (space_used + 3 <= cfg.capacity_of_ferry) {
+//                 sem_post(shared_data->load_truck);
+//                 space_used += 3;
+//             } else if (space_used + 1 <= cfg.capacity_of_ferry) {
+//                 sem_post(shared_data->load_car);
+//                 space_used += 1;
+//             } else {
+//                 break;
+//             }
+//         } else {
+//             if (space_used + 1 <= cfg.capacity_of_ferry) {
+//                 sem_post(shared_data->load_car);
+//                 space_used += 1;
+//             } else if (space_used + 3 <= cfg.capacity_of_ferry) {
+//                 sem_post(shared_data->load_truck);
+//                 space_used += 3;
+//             } else {
+//                 break;
+//             }
+//         }
+//         load_truck_next = !load_truck_next; // Alternate
+//     }
+// }
+
+
+int load_ferry(Config cfg, SharedData *shared_data) {
+    int space_used = 0;
+    int vehicle_loaded = 0;
+    int waiting_cars = shared_data->waiting_cars[shared_data->ferry_port];
+
+    while (space_used < cfg.capacity_of_ferry && waiting_cars != 0) {
+        if (space_used + 1 <= cfg.capacity_of_ferry) {
+            sem_post(shared_data->load_car);
+            space_used += 1;
+            waiting_cars--;
+            vehicle_loaded++;
+        } else {
+            break;
+        }
+    }
+    return vehicle_loaded;
+}
+
 void ferry_process(SharedData *shared_data, Config cfg) {
     int done = 0;
+    int unloaded_vehicles = 0;
 
     print_action(shared_data, 'P', 0, "started", shared_data->ferry_port);
-
     while (!done) {
         usleep(rand_range(0, cfg.max_ferry_arrival_us));
         print_action(shared_data, 'P', 0, "arrived", shared_data->ferry_port);
 
-        printf("Port %d is ready\n", shared_data->ferry_port);
+        unloaded_vehicles += unload_all_vehicles(shared_data);
 
-        // Notify vehicles that ferry has arrived at destination
-        for (int i = 0;
-             i < shared_data->loaded_cars; i++) {
-            sem_post(shared_data->ferry_arrived_sem);
-        }
+        if (shared_data->waiting_cars[shared_data->ferry_port] == 0 &&
+            shared_data->waiting_trucks[shared_data->ferry_port] == 0) {
+            //! CHANGE TO NUM_CARS + NUM_TRUCKS
+            if (unloaded_vehicles == cfg.num_cars) {
+                print_action(shared_data, 'P', 0, "finish", shared_data->ferry_port);
+                break;
+            }
+            ferry_to_another_port(shared_data);
+        } else {
 
-        // Allow vehicles to unload
-        for (int i = 0;
-             i < shared_data->loaded_cars + shared_data->loaded_trucks; i++) {
-            sem_post(shared_data->vehicle_unload_sem);
-        }
+            sem_post(shared_data->unload_complete[shared_data->ferry_port]);
 
-        shared_data->loaded_cars = 0;
-        shared_data->loaded_trucks = 0;
-
-        printf("Port %d waiting to be loaded\n", shared_data->ferry_port);
-
-        // Allow vehicles to board
-        for (int i = 0; i < 1; i++) {
             sem_post(shared_data->port_ready_sem[shared_data->ferry_port]);
+
+            int vehicle_loaded = load_ferry(cfg, shared_data);
+            printf("%d loaded\n", vehicle_loaded);
+            printf("%d were waiting\n", shared_data->waiting_cars[shared_data->ferry_port]);
+            for (int i = 0; i < vehicle_loaded; ++i) {
+                printf("waiting for {%d}\n", i);
+                sem_wait(shared_data->vehicle_loaded_sem);
+                printf("Done {%d}\n", i);
+            }
+            ferry_to_another_port(shared_data);
+
         }
-
-        // Wait for a vehicle to board
-        sem_wait(shared_data->ferry_loaded_sem);
-
-        print_action(shared_data, 'P', 0, "leaving", shared_data->ferry_port);
-
-        shared_data->ferry_port = (shared_data->ferry_port + 1) % 2;
-
-        if (no_more_vehicles_to_transport(shared_data, cfg)) {
-            print_action(shared_data, 'P', 0, "finish",
-                         shared_data->ferry_port);
-            done = 1;
-        }
-
-        printf("Another round\n");
     }
+}
+
+void add_to_queue(SharedData *shared_data, const char vehicle_type, int port){
+    sem_wait(shared_data->waiting_cars_sem);
+    if (vehicle_type == 'O') {
+        shared_data->waiting_cars[port]++;
+    } else {
+        shared_data->waiting_trucks[port]++;
+    }
+    sem_post(shared_data->waiting_cars_sem);
+
+}
+
+void load_vehicle_on_ferry(SharedData *shared_data, const char vehicle_type, int port) {
+    if (vehicle_type == 'O') {
+        sem_wait(shared_data->load_car);
+        shared_data->waiting_cars[port]--;
+        shared_data->loaded_cars++;
+        sem_post(shared_data->load_car);
+    }
+    else {
+        sem_wait(shared_data->load_truck);
+        shared_data->waiting_trucks[port]--;
+        shared_data->loaded_trucks++;
+        sem_post(shared_data->load_truck);
+    }
+}
+
+void unload_vehicle_from_ferry(SharedData *shared_data, const char vehicle_type, int port) {
+    sem_wait(shared_data->unloaded_from_ferry);
+    if (vehicle_type == 'O') {
+        shared_data->loaded_cars--;
+    } else {
+        shared_data->loaded_trucks--;
+    }
+    sem_post(shared_data->unloaded_from_ferry);
 }
 
 void vehicle_process(SharedData *shared_data, int vehicle_id, int port,
                      Config cfg, const char vehicle_type) {
     usleep(rand_range(0, cfg.max_vehicle_arrival_us));  // Simulate arrival time
     print_action(shared_data, vehicle_type, vehicle_id, "arrived", port);
-
-    // Mark as waiting
-    if (vehicle_type == 'O') {
-        shared_data->waiting_cars[port]++;
-    } else {
-        shared_data->waiting_trucks[port]++;
-    }
-
-    // Wait for ferry to be ready at this port
+    
+    // Add to vehicle to queue
+    add_to_queue(shared_data, vehicle_type, port);
+    // Wait for unload
+    sem_wait(shared_data->unload_complete[port]);
+    // Wait for port to be ready
     sem_wait(shared_data->port_ready_sem[port]);
+    // Load vehicle
 
-    sem_wait(shared_data->helper_sem);
-    // Boarding
-    print_action(shared_data, vehicle_type, vehicle_id, "boarding", port);
-
-    // Update shared info
     if (vehicle_type == 'O') {
-        shared_data->waiting_cars[port]--;
-        shared_data->loaded_cars++;
+        sem_wait(shared_data->load_car);
     } else {
-        shared_data->waiting_trucks[port]--;
-        shared_data->loaded_trucks++;
+        sem_wait(shared_data->load_truck);
     }
-    sem_post(shared_data->helper_sem);
 
-    // Inform ferry we boarded
-    sem_post(shared_data->ferry_loaded_sem);
+    load_vehicle_on_ferry(shared_data, vehicle_type, port);
 
-    // 🚨 Wait for the ferry to arrive at the other port
-    sem_wait(shared_data->ferry_arrived_sem);
+    print_action(shared_data, vehicle_type, vehicle_id, "loaded", port);
+    sem_post(shared_data->vehicle_loaded_sem);
+    
+    // Wait for unload
+    sem_wait(shared_data->unload_vehicle_sem[(port + 1) % 2]);
 
-    // 🚪 Wait for permission to unload
-    sem_wait(shared_data->vehicle_unload_sem);
+    // Unload vehicle
+    unload_vehicle_from_ferry(shared_data, vehicle_type, port);
 
-    int other_port = (port + 1) % 2;
-    print_action(shared_data, vehicle_type, vehicle_id, "leaving", other_port);
+    port = (port + 1) % 2;
+    print_action(shared_data, vehicle_type, vehicle_id, "unloaded", port);
+    sem_post(shared_data->vehicle_unloaded_sem);
 }
 
 void create_ferry_process(SharedData *shared_data, Config cfg) {
     pid_t ferry_pid = fork();
     if (ferry_pid == 0) {
         // Ferry process
+
         ferry_process(shared_data, cfg);
         exit(EX_SUCCESS);
     } else if (ferry_pid < 0) {
@@ -261,7 +395,7 @@ void create_vehicle_process(SharedData *shared_data, Config cfg,
         if (vehicle_pid == 0) {
             srand(getpid());  // Seed the random number generator using the
                               // process ID
-            int port = 0;
+            int port = rand() % 2;
             int id = i + 1;
             print_action(shared_data, vehicle_type, id, "started", port);
             vehicle_process(shared_data, id, port, cfg,
@@ -276,36 +410,6 @@ void create_vehicle_process(SharedData *shared_data, Config cfg,
 
 int cleanup(SharedData *shared_data) {
     // Close and unlink semaphores
-    if (sem_close(shared_data->ferry_loaded_sem) == -1) {
-        fprintf(stderr,
-                "[ERROR] Failed to close semaphore: /ferry_loaded_sem\n");
-        return EX_ERROR;
-    }
-    if (sem_unlink("/ferry_loaded_sem") == -1) {
-        fprintf(stderr,
-                "[ERROR] Failed to unlink semaphore: /ferry_loaded_sem\n");
-        return EX_ERROR;
-    }
-    if (sem_close(shared_data->helper_sem) == -1) {
-        fprintf(stderr,
-                "[ERROR] Failed to close semaphore: /helper_sem\n");
-        return EX_ERROR;
-    }
-    if (sem_unlink("/helper_sem") == -1) {
-        fprintf(stderr,
-                "[ERROR] Failed to unlink semaphore: /helper_sem\n");
-        return EX_ERROR;
-    }
-    if (sem_close(shared_data->vehicle_unload_sem) == -1) {
-        fprintf(stderr,
-                "[ERROR] Failed to close semaphore: /vehicle_unload_sem\n");
-        return EX_ERROR;
-    }
-    if (sem_unlink("/vehicle_unload_sem") == -1) {
-        fprintf(stderr,
-                "[ERROR] Failed to unlink semaphore: /vehicle_unload_sem\n");
-        return EX_ERROR;
-    }
     if (sem_close(shared_data->action_counter_sem) == -1) {
         fprintf(stderr,
                 "[ERROR] Failed to close semaphore: /action_counter_sem\n");
@@ -314,6 +418,76 @@ int cleanup(SharedData *shared_data) {
     if (sem_unlink("/action_counter_sem") == -1) {
         fprintf(stderr,
                 "[ERROR] Failed to unlink semaphore: /action_counter_sem\n");
+        return EX_ERROR;
+    }
+    if (sem_close(shared_data->waiting_cars_sem) == -1) {
+        fprintf(stderr,
+                "[ERROR] Failed to close semaphore: /waiting_cars_sem\n");
+        return EX_ERROR;
+    }
+    if (sem_unlink("/waiting_cars_sem") == -1) {
+        fprintf(stderr,
+                "[ERROR] Failed to unlink semaphore: /waiting_cars_sem\n");
+        return EX_ERROR;
+    }
+    if (sem_close(shared_data->vehicle_loaded_sem) == -1) {
+        fprintf(stderr,
+                "[ERROR] Failed to close semaphore: /vehicle_loaded_sem\n");
+        return EX_ERROR;
+    }
+    if (sem_unlink("/vehicle_loaded_sem") == -1) {
+        fprintf(stderr,
+                "[ERROR] Failed to unlink semaphore: /vehicle_loaded_sem\n");
+        return EX_ERROR;
+    }
+    if (sem_close(shared_data->vehicle_unloaded_sem) == -1) {
+        fprintf(stderr,
+                "[ERROR] Failed to close semaphore: /vehicle_unloaded_sem\n");
+        return EX_ERROR;
+    }
+    if (sem_unlink("/vehicle_unloaded_sem") == -1) {
+        fprintf(stderr,
+                "[ERROR] Failed to unlink semaphore: /vehicle_unloaded_sem\n");
+        return EX_ERROR;
+    }
+    if (sem_close(shared_data->unload_complete[0]) == -1) {
+        fprintf(stderr,
+                "[ERROR] Failed to close semaphore: /unload_complete_0\n");
+        return EX_ERROR;
+    }
+    if (sem_unlink("/unload_complete_0") == -1) {
+        fprintf(stderr,
+                "[ERROR] Failed to unlink semaphore: /unload_complete_0\n");
+        return EX_ERROR;
+    }
+    if (sem_close(shared_data->unload_complete[1]) == -1) {
+        fprintf(stderr,
+                "[ERROR] Failed to close semaphore: /unload_complete_1\n");
+        return EX_ERROR;
+    }
+    if (sem_unlink("/unload_complete_1") == -1) {
+        fprintf(stderr,
+                "[ERROR] Failed to unlink semaphore: /unload_complete_1\n");
+        return EX_ERROR;
+    }
+    if (sem_close(shared_data->unload_vehicle_sem[0]) == -1) {
+        fprintf(stderr,
+                "[ERROR] Failed to close semaphore: /unload_vehicle_sem_0\n");
+        return EX_ERROR;
+    }
+    if (sem_unlink("/unload_vehicle_sem_0") == -1) {
+        fprintf(stderr,
+                "[ERROR] Failed to unlink semaphore: /unload_vehicle_sem_0\n");
+        return EX_ERROR;
+    }
+    if (sem_close(shared_data->unload_vehicle_sem[1]) == -1) {
+        fprintf(stderr,
+                "[ERROR] Failed to close semaphore: /unload_vehicle_sem_1\n");
+        return EX_ERROR;
+    }
+    if (sem_unlink("/unload_vehicle_sem_1") == -1) {
+        fprintf(stderr,
+                "[ERROR] Failed to unlink semaphore: /unload_vehicle_sem_1\n");
         return EX_ERROR;
     }
     if (sem_close(shared_data->port_ready_sem[0]) == -1) {
@@ -336,16 +510,35 @@ int cleanup(SharedData *shared_data) {
                 "[ERROR] Failed to unlink semaphore: /port_ready_sem_1\n");
         return EX_ERROR;
     }
-    if (sem_close(shared_data->ferry_arrived_sem) == -1) {
+    if (sem_close(shared_data->unloaded_from_ferry) == -1) {
         fprintf(stderr,
-                "[ERROR] Failed to close semaphore: /ferry_arrived_sem\n");
+                "[ERROR] Failed to close semaphore: /unloaded_from_ferry\n");
         return EX_ERROR;
     }
-    if (sem_unlink("/ferry_arrived_sem") == -1) {
+    if (sem_unlink("/unloaded_from_ferry") == -1) {
         fprintf(stderr,
-                "[ERROR] Failed to unlink semaphore: /ferry_arrived_sem\n");
+                "[ERROR] Failed to unlink semaphore: /unloaded_from_ferry\n");
         return EX_ERROR;
     }
+    if (sem_close(shared_data->load_car) == -1) {
+        fprintf(stderr, "[ERROR] Failed to close semaphore: /load_car\n");
+        return EX_ERROR;
+    }
+    if (sem_unlink("/load_car") == -1) {
+        fprintf(stderr,
+                "[ERROR] Failed to unlink semaphore: /load_car\n");
+        return EX_ERROR;
+    }
+    if (sem_close(shared_data->load_truck) == -1) {
+        fprintf(stderr, "[ERROR] Failed to close semaphore: /load_truck\n");
+        return EX_ERROR;
+    }
+    if (sem_unlink("/load_truck") == -1) {
+        fprintf(stderr,
+                "[ERROR] Failed to unlink semaphore: /load_truck\n");
+        return EX_ERROR;
+    }
+
     // Clean up shared memory
     munmap(shared_data,
            sizeof(SharedData));  // Unmap the shared memory when done
@@ -395,9 +588,7 @@ int main(int argc, char const *argv[]) {
     // 4. Wait for all processes to finish
     wait_for_children();
 
-    // 5. Print shared data
-    print_shared_data(shared_data);
-    // 6. Clean up
+    // 5. Clean up
     if (cleanup(shared_data) != EX_SUCCESS) {
         return EX_ERROR;
     }
