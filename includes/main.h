@@ -2,7 +2,6 @@
 // FIT VUT Student
 // https://github.com/sipxi
 // Date: 18/05/2025
-
 #ifndef MAIN_H
 #define MAIN_H
 #include <sys/mman.h>   // mmap
@@ -14,6 +13,7 @@
 #include <sys/wait.h> // wait
 #include <semaphore.h> // sem_t
 #include <fcntl.h>  // For O_CREAT, O_EXCL, etc.
+#include <stdbool.h>
 // --- Argument count ---
 #define EXPECTED_ARGS 6
 
@@ -56,14 +56,21 @@ typedef struct {
     int waiting_cars[2];      // Number of cars waiting at each port
     int loaded_trucks;        // Number of trucks currently on the ferry
     int loaded_cars;          // Number of cars currently on the ferry
-    sem_t *action_counter_sem;    // Semaphore for synchronizing action_counter
-    sem_t *ferry_sem;
+    sem_t *port_ready_sem[2];     // Semaphore for synchronizing port readiness
+    sem_t *ferry_loaded_sem;          // Semaphore for synchronizing ferry loading
+    sem_t *action_counter_sem;    // Semaphore for synchronizing action counter
+    sem_t *vehicle_unload_sem;
+    sem_t *ferry_arrived_sem;
+    sem_t *helper_sem;
 } SharedData;
 
 
 SharedData *init_shared_data(Config cfg);
 int parse_args(int argc, char const *argv[], Config *cfg);
 int rand_range(int min, int max);
+
+
+int no_more_vehicles_to_transport(SharedData *shared_data, Config cfg);
 
 void print_action(SharedData *shared_data, const char vehicle_type, int vehicle_id, const char *action, int port);
 void print_shared_data(SharedData *shared_data);
