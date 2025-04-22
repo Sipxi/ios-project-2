@@ -157,57 +157,77 @@ int unload_vehicles(SharedData *shared_data, Config cfg) {
     return to_unload;
 }
 
-int load_vehicles(SharedData *shared_data, Config cfg) {
-    int loaded_vehicles = 0;
-    int space_left = cfg.capacity_of_ferry;  // Available space on the ferry
+int load_ferry(SharedData* shared_data, Config cfg) {
+    int port = shared_data->ferry_port;
+    int remaining_capacity = cfg.capacity_of_ferry;
+    int vehicle_count = 0;
 
-    // Alternate between loading a cargo truck and a personal vehicle
-    while (space_left > 0) {
-        // Try to load a cargo truck if there is space
+    while (remaining_capacity > 0) {
+        sem_wait(&shared_data->protection_mutex);
+        int loaded = 0;
+
+        // Try to load expected vehicle type
         if (shared_data->next_vehicle_is_truck) {
-            if (space_left >= TRUCK_SIZE) {  // Check if there is enough space for a truck
-                sem_post(&shared_data->load_truck);  // Signal that a truck can be loaded
-                shared_data->next_vehicle_is_truck = 0;  // Next vehicle will be a car
-                loaded_vehicles++;
-                space_left -= TRUCK_SIZE;  // Reduce the space by the truck size
-                printf("Loaded cargo truck, remaining space: %d\n", space_left);
+            if (shared_data->waiting_trucks[port] > 0 && remaining_capacity >= 3) {
+                shared_data->waiting_trucks[port]--;
+                shared_data->loaded_trucks++;
+                remaining_capacity -= 3;
+                shared_data->vehicles_to_unload++;
+                sem_post(&shared_data->load_truck);
+                vehicle_count++;
+                loaded = 1;
+            }
+        } else {
+            if (shared_data->waiting_cars[port] > 0 && remaining_capacity >= 1) {
+                shared_data->waiting_cars[port]--;
+                shared_data->loaded_cars++;
+                remaining_capacity -= 1;
+                shared_data->vehicles_to_unload++;
+                sem_post(&shared_data->load_car);
+                vehicle_count++;
+                loaded = 1;
+            }
+        }
+
+        // Try alternate vehicle if expected couldn't load
+        if (!loaded) {
+            if (!shared_data->next_vehicle_is_truck) {
+                if (shared_data->waiting_trucks[port] > 0 && remaining_capacity >= 3) {
+                    shared_data->waiting_trucks[port]--;
+                    shared_data->loaded_trucks++;
+                    remaining_capacity -= 3;
+                    shared_data->vehicles_to_unload++;
+                    sem_post(&shared_data->load_truck);
+                    vehicle_count++;
+                    loaded = 1;
+                }
             } else {
-                // No more space for a truck, try loading a car if possible
-                if (space_left >= CAR_SIZE) {  // Check if there is space for a car
-                    sem_post(&shared_data->load_car);  // Signal that a car can be loaded
-                    shared_data->next_vehicle_is_truck = 1;  // Next vehicle will be a truck
-                    loaded_vehicles++;
-                    space_left -= CAR_SIZE;  // Reduce space by the car size
-                    printf("Loaded personal vehicle, remaining space: %d\n", space_left);
-                } else {
-                    break;  // No more space for any vehicle
+                if (shared_data->waiting_cars[port] > 0 && remaining_capacity >= 1) {
+                    shared_data->waiting_cars[port]--;
+                    shared_data->loaded_cars++;
+                    remaining_capacity -= 1;
+                    shared_data->vehicles_to_unload++;
+                    sem_post(&shared_data->load_car);
+                    vehicle_count++;
+                    loaded = 1;
                 }
             }
         }
-        // Try to load a personal car
-        else {
-            if (space_left >= CAR_SIZE) {  // Check if there is space for a car
-                sem_post(&shared_data->load_car);  // Signal that a car can be loaded
-                shared_data->next_vehicle_is_truck = 1;  // Next vehicle will be a truck
-                loaded_vehicles++;
-                space_left -= CAR_SIZE;  // Reduce space by the car size
-                printf("Loaded personal vehicle, remaining space: %d\n", space_left);
-            } else {
-                // No more space for a car, try loading a truck if possible
-                if (space_left >= TRUCK_SIZE) {  // Check if there is enough space for a truck
-                    sem_post(&shared_data->load_truck);  // Signal that a truck can be loaded
-                    shared_data->next_vehicle_is_truck = 0;  // Next vehicle will be a car
-                    loaded_vehicles++;
-                    space_left -= TRUCK_SIZE;  // Reduce space by the truck size
-                    printf("Loaded cargo truck, remaining space: %d\n", space_left);
-                } else {
-                    break;  // No more space for any vehicle
-                }
-            }
+
+        // No vehicle could be loaded
+        if (!loaded) {
+            sem_post(&shared_data->protection_mutex);
+            break;
         }
+
+        // Alternate type for next expected vehicle
+        shared_data->next_vehicle_is_truck = !shared_data->next_vehicle_is_truck;
+        sem_post(&shared_data->protection_mutex);
     }
-    return loaded_vehicles;
+
+    return vehicle_count;
 }
+
 
 int test_load_vehicles(SharedData *shared_data, Config cfg) {
     int loaded_vehicles = 0;
@@ -251,7 +271,7 @@ void ferry_process(SharedData *shared_data, Config cfg) {
 
         printf("Port %d is ready for loading\n", shared_data->ferry_port);
         //ferry ready for loading
-        int to_load = test_load_vehicles(shared_data, cfg);
+        int to_load = load_ferry(shared_data, cfg);
         for (int i = 0; i < to_load; i++) {
             sem_post(&shared_data->port_ready[shared_data->ferry_port]);
         }
@@ -278,6 +298,11 @@ void vehicle_process(SharedData *shared_data, Config cfg, char vehicle_type,
     }
     sem_post(&shared_data->protection_mutex);
 
+    if (vehicle_type == 'N') {
+        sem_wait(&shared_data->load_truck);
+    } else {
+        sem_wait(&shared_data->load_car);
+    }
     // Wait for ferry to be ready in specific port
     //printf("ID: %d Waiting for port %d \n", id, port);
     sem_wait(&shared_data->port_ready[port]);
@@ -424,7 +449,7 @@ int main(int argc, char const *argv[]) {
     create_vehicle_process(shared_data, cfg, 'O');
 
     // 3. Create truck processes
-    //create_vehicle_process(shared_data, cfg, 'N');
+    create_vehicle_process(shared_data, cfg, 'N');
 
     // 4. Wait for all processes to finish
     wait_for_children();
