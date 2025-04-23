@@ -108,13 +108,13 @@ SharedData *init_shared_data(Config cfg) {
         return NULL;
     }
 
-    if (sem_init(&shared_data->vehicle_loaded, 1, 1) == -1) {
-        fprintf(stderr, "[ERROR] sem_init failed for vehicle_loaded\n");
+    if (sem_init(&shared_data->vehicle_loading, 1, 1) == -1) {
+        fprintf(stderr, "[ERROR] sem_init failed for vehicle_loading\n");
         return NULL;
     }
 
-    if (sem_init(&shared_data->all_vehicles_loaded, 1, 0) == -1) {
-        fprintf(stderr, "[ERROR] sem_init failed for all_vehicles_loaded\n");
+    if (sem_init(&shared_data->loading_done, 1, 0) == -1) {
+        fprintf(stderr, "[ERROR] sem_init failed for loading_done\n");
         return NULL;
     }
 
@@ -192,7 +192,7 @@ int load_ferry(SharedData* shared_data, Config cfg) {
                 shared_data->vehicles_to_unload++;
                 sem_post(&shared_data->load_truck);
                 sem_post(&shared_data->port_ready[port]);
-                sem_wait(&shared_data->vehicle_loaded);
+                sem_wait(&shared_data->vehicle_loading);
                 vehicle_count++;
                 loaded = 1;
             }
@@ -203,7 +203,7 @@ int load_ferry(SharedData* shared_data, Config cfg) {
                 shared_data->vehicles_to_unload++;
                 sem_post(&shared_data->load_car);
                 sem_post(&shared_data->port_ready[port]);
-                sem_wait(&shared_data->vehicle_loaded);
+                sem_wait(&shared_data->vehicle_loading);
                 vehicle_count++;
                 loaded = 1;
             }
@@ -218,7 +218,7 @@ int load_ferry(SharedData* shared_data, Config cfg) {
                     shared_data->vehicles_to_unload++;
                     sem_post(&shared_data->load_truck);
                     sem_post(&shared_data->port_ready[port]);
-                    sem_wait(&shared_data->vehicle_loaded);
+                    sem_wait(&shared_data->vehicle_loading);
                     vehicle_count++;
                     loaded = 1;
                 }
@@ -229,7 +229,7 @@ int load_ferry(SharedData* shared_data, Config cfg) {
                     shared_data->vehicles_to_unload++;
                     sem_post(&shared_data->load_car);
                     sem_post(&shared_data->port_ready[port]);
-                    sem_wait(&shared_data->vehicle_loaded);
+                    sem_wait(&shared_data->vehicle_loading);
                     vehicle_count++;
                     loaded = 1;
                 }
@@ -264,17 +264,18 @@ void ferry_process(SharedData *shared_data, Config cfg) {
 
 
     while (1) {
+        // Wait for ferry  to arrive
         usleep(rand_range(0, cfg.max_ferry_arrival_us));
         print_action(shared_data, 'P', 0, "arrived", shared_data->ferry_port);
-        //printf("Waiting for vehicles to unload...\n");
+
+        // If there are vehicles to unload unload them
         if (shared_data->vehicles_to_unload > 0) {
             unload_vehicles(shared_data, cfg);  // signal vehicles to unload
             // Wait until all of them reported back
-            //printf("Waiting for everybody to unload...\n");
             sem_wait(&shared_data->unload_complete_sem);
         }
-        //printf("All vehicles unloaded\n");
 
+        // Check if there are no more vehicles to work with
         sem_wait(&shared_data->lock_mutex);
         //printf("Total vehicles unloaded: %d\n", shared_data->total_vehicles_unloaded);
         //printf("TOTAL VEHICLES: %d\n", cfg.num_cars + cfg.num_trucks);
@@ -292,22 +293,15 @@ void ferry_process(SharedData *shared_data, Config cfg) {
         shared_data->loaded_trucks = 0;
         sem_post(&shared_data->lock_mutex);
 
-        //printf("Reset counters\n");
-
-        //printf("Port %d is ready for loading\n", shared_data->ferry_port);
-        //ferry ready for loading
+        // Signal vehicles to load
         int to_load = load_ferry(shared_data, cfg);
 
-        // TODO: load logic goes here (just like unload, but reversed)
-        //printf("%d vehicles can be loaded\n", to_load);
+        // Wait for all vehicles to load
         for (int i = 0; i < to_load; i++) {
-            //printf("Waiting {%d}\n", i);
-            sem_wait(&shared_data->all_vehicles_loaded);
-            //printf("Vehicle loaded\n");
+            sem_wait(&shared_data->loading_done);
         }
 
-        //printf("All vehicles loaded\n");
-        //printf("Going to another port\n");
+        // Go to another port
         ferry_to_another_port(shared_data);
 
     }
@@ -330,17 +324,19 @@ void vehicle_process(SharedData *shared_data, Config cfg, char vehicle_type,
     }
     sem_post(&shared_data->lock_mutex);
 
+    // Wait for port to be ready
     sem_wait(&shared_data->port_ready[port]);
+    // Based on vehicle type wait for signal
     if (vehicle_type == 'N') {
         sem_wait(&shared_data->load_truck);
     } else {
         sem_wait(&shared_data->load_car);
     }
-    // Wait for ferry to be ready in specific port
-    sem_post(&shared_data->vehicle_loaded);
+    // Signal to ferry that I'm loading
+    sem_post(&shared_data->vehicle_loading);
 
 
-    // Now I'm loading...
+    // Edit shared data
     sem_wait(&shared_data->lock_mutex);
     if (vehicle_type == 'N') {
         shared_data->loaded_trucks++;
@@ -348,12 +344,13 @@ void vehicle_process(SharedData *shared_data, Config cfg, char vehicle_type,
         shared_data->loaded_cars++;
     }
     print_action(shared_data, vehicle_type, id, "loading", port);
-    sem_post(&shared_data->all_vehicles_loaded);
+    // Signal to the ferry that I'm done
+    sem_post(&shared_data->loading_done);
     sem_post(&shared_data->lock_mutex);
 
 
 
-    // Wait until ferry says "go ahead"
+    // Wait until ferry says go ahead
     sem_wait(&shared_data->unload_vehicle);
 
     // Now I'm unloading...
@@ -361,10 +358,9 @@ void vehicle_process(SharedData *shared_data, Config cfg, char vehicle_type,
 
     // Notify ferry I’m done
     sem_wait(&shared_data->lock_mutex);
+    // Edit shared data
     shared_data->vehicles_unloaded++;
-    //printf("I'm done: ID - %d \n", id);
-    //printf("Vehicles unloaded: %d\n", shared_data->vehicles_unloaded);
-    //printf("Vehicles to unload: %d\n", shared_data->vehicles_to_unload);
+    // If all vehicles unloaded, signal to ferry
     if (shared_data->vehicles_unloaded == shared_data->vehicles_to_unload) {
         sem_post(&shared_data->unload_complete_sem);
     }
@@ -439,11 +435,11 @@ int cleanup(SharedData *shared_data) {
         return EXIT_FAILURE;
     }
 
-    if (sem_destroy(&shared_data->vehicle_loaded) == -1) {
+    if (sem_destroy(&shared_data->vehicle_loading) == -1) {
         fprintf(stderr, "[ERROR] sem_destroy failed\n");
         return EXIT_FAILURE;
     }
-    if (sem_destroy(&shared_data->all_vehicles_loaded) == -1) {
+    if (sem_destroy(&shared_data->loading_done) == -1) {
         fprintf(stderr, "[ERROR] sem_destroy failed\n");
         return EXIT_FAILURE;
     }

@@ -59,12 +59,12 @@ typedef struct {
     sem_t action_counter_sem;    // Semaphore for synchronizing action counter
     sem_t unload_vehicle;
     sem_t lock_mutex;
-    sem_t vehicle_loaded;
+    sem_t vehicle_loading;
     sem_t unload_complete_sem;     // ferry waits on this
     sem_t load_truck;
     sem_t load_car;
     sem_t port_ready[2];
-    sem_t all_vehicles_loaded;
+    sem_t loading_done;
 } SharedData;
 
 
