@@ -13,6 +13,7 @@
 #include <sys/wait.h> // wait
 #include <semaphore.h> // sem_t
 #include <stdbool.h>
+#include <string.h>
 // --- Argument count ---
 #define EXPECTED_ARGS 6
 
