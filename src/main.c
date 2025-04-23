@@ -1,12 +1,20 @@
-// Author: Serhij Čepil (sipxi)
-// FIT VUT Student
-// https://github.com/sipxi
-// Date: 18/05/2025
-// Time spent: 30h
-
+/**
+ * Author: Serhij Čepil (sipxi)
+ * FIT VUT Student
+ * https://github.com/sipxi
+ * Date: 18/05/2025
+ * Time spent: 58h
+ */
 #include "main.h"
 
-//* Function to parse arguments
+/**
+ * @brief Function to parse arguments
+ * @param argc Number of arguments.
+ * @param argv Arguments list.
+ * @param cfg Configuration structure.
+ * @return EXIT_SUCCESS if successful, EXIT_FAILURE otherwise.
+ * TODO Helper function to parse args?
+ */
 int parse_args(int argc, char const *argv[], Config *cfg) {
     if (argc != EXPECTED_ARGS) {
         fprintf(stderr, "[ERROR] Expected %d arguments, got %d\n",
@@ -62,6 +70,17 @@ int parse_args(int argc, char const *argv[], Config *cfg) {
     return EXIT_SUCCESS;
 }
 
+/**
+ * @brief Initializes shared data structure and semaphores
+ * @param cfg Configuration structure.
+ * @return Pointer to the initialized Shareddata structure if successful,
+ *         otherwise NULL on failure.
+ * 
+ * Allocates shared memory for the SharedData structure with mmap,
+ * initializes semaphores for synchronization,
+ * sets initial values for shared data.
+ * TODO Helper func, to reduce code?
+ */
 SharedData *init_shared_data(Config cfg) {
     SharedData *shared_data =
         mmap(NULL, sizeof(SharedData), PROT_READ | PROT_WRITE,
@@ -133,7 +152,12 @@ SharedData *init_shared_data(Config cfg) {
     return shared_data;
 }
 
-//* Function to generate a random number within a range
+/**
+ * @brief Generates a random number within a given range inclusive
+ * @param min Lower bound of the range 
+ * @param max Upper bound of the range
+ * @return A random int in the range (min , max)
+ */
 int rand_range(int min, int max) {
     return min + rand() / (RAND_MAX / (max - min + 1) + 1);
 }
@@ -352,7 +376,7 @@ void vehicle_process(SharedData *shared_data, Config cfg, char vehicle_type,
     } else {
         shared_data->loaded_cars++;
     }
-    print_action(shared_data, vehicle_type, id, "loading", port);
+    print_action(shared_data, vehicle_type, id, "boarding", port);
     // Signal to the ferry that I'm done
     sem_post(&shared_data->loading_done);
     sem_post(&shared_data->lock_mutex);
@@ -408,7 +432,7 @@ void create_vehicle_process(SharedData *shared_data, Config cfg,
         }
     }
 }
-
+//TODO helper funcs
 int cleanup(SharedData *shared_data) {
     // Clean up the semaphore, print error if it fails
     if (sem_destroy(&shared_data->action_counter_sem) == -1) {

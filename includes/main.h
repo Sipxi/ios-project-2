@@ -35,7 +35,7 @@
 #define TRUCK_SIZE 3
 #define CAR_SIZE 1
 
-// Configuration structure
+// --- Structs ---
 typedef struct {
     int num_trucks;
     int num_cars;
@@ -43,7 +43,6 @@ typedef struct {
     int max_vehicle_arrival_us;
     int max_ferry_arrival_us;
 } Config;
-
 
 typedef struct {
     int action_counter;       // Global action counter (A)
@@ -68,7 +67,7 @@ typedef struct {
     sem_t loading_done;
 } SharedData;
 
-
+//--- Functions ---
 SharedData *init_shared_data(Config cfg);
 int parse_args(int argc, char const *argv[], Config *cfg);
 int rand_range(int min, int max);

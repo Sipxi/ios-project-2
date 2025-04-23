@@ -1,55 +1,45 @@
-1: P: started, Port: 0
-2: P: arrived, Port: 0
-3: P: leaving, Port: 0
-4: P: arrived, Port: 1
-5: P: leaving, Port: 1
-6: O 1: started, Port: 0
-7: P: arrived, Port: 0
-8: P: leaving, Port: 0
-9: O 2: started, Port: 1
-10: P: arrived, Port: 1
-11: P: leaving, Port: 1
-12: O 1: arrived, Port: 0
-13: O 2: arrived, Port: 1
-14: P: arrived, Port: 0
-15: O 1: loading, Port: 0
-16: P: leaving, Port: 0
-17: P: arrived, Port: 1
-18: O 1: leaving, Port: 1
-19: O 2: loading, Port: 1
-20: P: leaving, Port: 1
-21: P: arrived, Port: 0
-22: O 3: started, Port: 0
-23: O 2: leaving, Port: 0
-24: O 3: arrived, Port: 0
-25: O 3: loading, Port: 0
-26: P: leaving, Port: 0
-27: N 1: started, Port: 0
-28: N 3: started, Port: 1
-29: O 4: started, Port: 0
-30: N 2: started, Port: 1
-31: O 4: arrived, Port: 0
-32: P: arrived, Port: 1
-33: N 4: started, Port: 0
-34: N 3: arrived, Port: 1
-35: O 3: leaving, Port: 1
-36: N 1: arrived, Port: 0
-37: N 2: arrived, Port: 1
-38: N 3: loading, Port: 1
-39: N 4: arrived, Port: 0
-40: P: leaving, Port: 1
-41: P: arrived, Port: 0
-42: N 3: leaving, Port: 0
-43: O 4: loading, Port: 0
-44: N 4: loading, Port: 0
-45: N 1: loading, Port: 0
-46: P: leaving, Port: 0
-47: P: arrived, Port: 1
-48: O 4: leaving, Port: 1
-49: N 1: leaving, Port: 1
-50: N 4: leaving, Port: 1
-51: N 2: loading, Port: 1
-52: P: leaving, Port: 1
-53: P: arrived, Port: 0
-54: N 2: leaving, Port: 0
-55: P: finished, Port: 0
+1: P: started
+2: P: arrived to 0
+3: P: leaving 0
+4: O 1: started
+5: O 3: started
+6: P: arrived to 1
+7: O 1: arrived to 0
+8: N 1: started
+9: P: leaving 1
+10: O 4: started
+11: O 2: started
+12: O 3: arrived to 0
+13: N 4: started
+14: P: arrived to 0
+15: O 3: boarding
+16: N 3: started
+17: N 2: started
+18: O 4: arrived to 0
+19: O 2: arrived to 1
+20: N 1: arrived to 1
+21: N 4: arrived to 1
+22: O 1: boarding
+23: N 2: arrived to 0
+24: P: leaving 0
+25: N 3: arrived to 0
+26: P: arrived to 1
+27: O 3: leaving in 1
+28: O 1: leaving in 1
+29: O 2: boarding
+30: N 1: boarding
+31: N 2: boarding
+32: P: leaving 1
+33: P: arrived to 0
+34: N 2: leaving in 1
+35: O 2: leaving in 0
+36: N 1: leaving in 0
+37: O 4: boarding
+38: N 4: boarding
+39: N 3: boarding
+40: P: leaving 0
+41: P: arrived to 1
+42: N 3: leaving in 1
+43: N 4: leaving in 0
+44: O 4: leaving in 1
+45: P: finish
