@@ -9,7 +9,7 @@
 
 
 // Global flag to track test failures
-static bool test_failure = false;
+static int test_failure = false;
 static int tests_passed = 0;
 static int tests_failed = 0;
 
