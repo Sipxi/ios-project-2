@@ -8,8 +8,8 @@
 #ifndef MAIN_H
 #define MAIN_H
 #include <semaphore.h>  // sem_t
-#include <stdio.h>   // input output
-#include <stdlib.h>  //stol
+#include <stdio.h>      // input output
+#include <stdlib.h>     //stol
 #include <string.h>
 #include <sys/mman.h>   // mmap
 #include <sys/types.h>  // pid_t
@@ -71,32 +71,28 @@ typedef struct {
 
 //--- Helpers ---
 
-int parse_uint(const char *value_str, unsigned short min, unsigned short max,
-               const char *arg_name, unsigned short *result);
+int parse_uint(const char *value_str, int min, int max, const char *arg_name,
+               int *result);
 int destroy_semaphore(sem_t *sem, const char *sem_name);
 int rand_range(int min, int max);
 int init_semaphore(sem_t *sem, int pshared, unsigned int value,
                    const char *sem_name);
-
 void wait_for_children();
-//? Exit?
 FILE *file_init(const char *filename);
 void wait_for_loading_signal(SharedData *shared_data, char vehicle_type,
                              int port);
 void board_vehicle(SharedData *shared_data, Config cfg, char vehicle_type,
                    int id);
-void add_vehicle_to_port(SharedData *shared_data, char vehicle_type,
-                         int port);
+void add_vehicle_to_port(SharedData *shared_data, char vehicle_type, int port);
 void ferry_to_another_port(SharedData *shared_data, FILE *log_file);
 int unload_vehicles(SharedData *shared_data);
 int try_load_vehicle(SharedData *shared_data, int port, int is_truck,
-    int *remaining_capacity, int *vehicle_count);
+                     int *remaining_capacity, int *vehicle_count);
 //--- Functions ---
 
 int cleanup(SharedData *shared_data);
 int load_ferry(SharedData *shared_data, Config cfg);
 int parse_args(int argc, char const *argv[], Config *cfg);
-//? Too many args?
 void print_action(SharedData *shared_data, FILE *log_file,
                   const char vehicle_type, int vehicle_id, const char *action,
                   int port);

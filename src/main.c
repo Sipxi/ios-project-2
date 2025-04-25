@@ -8,16 +8,16 @@
 #include "main.h"
 
 /**
- * @brief Helper function to parse and validate an unsigned integer argument.
- * @param value_str The value that has to be parsed.
- * @param min Minimum allowed value.
- * @param max Maximum allowed value.
- * @param arg_name Name of the argument for error messages.
- * @param result Pointer to store the parsed value.
- * @return EXIT_SUCCESS if successful, EXIT_FAILURE otherwise.
+ * @brief Helper function to parse and validate an argument
+ * @param value_str The value that has to be parsed
+ * @param min Minimum allowed value
+ * @param max Maximum allowed value
+ * @param arg_name Name of the argument for error messages
+ * @param result Pointer to store the parsed value
+ * @return EXIT_SUCCESS if successful, EXIT_FAILURE otherwise
  */
-int parse_uint(const char *value_str, unsigned short min, unsigned short max,
-               const char *arg_name, unsigned short *result) {
+int parse_uint(const char *value_str, int min, int max, const char *arg_name,
+               int *result) {
     char *end;
     int value = strtoul(value_str, &end, 10);
 
@@ -40,6 +40,9 @@ int parse_uint(const char *value_str, unsigned short min, unsigned short max,
  * @param argv Arguments list
  * @param cfg Configuration structure
  * @return EXIT_SUCCESS if successful, EXIT_FAILURE otherwise
+ * 
+ * This function parses the command line arguments and validates them.
+ * If any argument is invalid, it prints an error message and returns EXIT_FAILURE.
  */
 int parse_args(int argc, char const *argv[], Config *cfg) {
     if (argc != EXPECTED_ARGS) {
@@ -159,12 +162,11 @@ FILE *file_init(const char *filename) {
 
 /**
  * @brief Logs an action performed by a vehicle or ferry to a log file.
- *
  * @param shared_data Pointer to the shared data.
  * @param log_file File pointer to the log file where actions are recorded.
  * @param vehicle_type Character representing the type of vehicle ('O' for car,
  * 'N' for truck, 'P' for ferry).
- * @param id Identifier of the vehicle. Pass 0 for ferry.
+ * @param id ID of the vehicle. Pass 0 for ferry.
  * @param action Description of the action being logged.
  * @param port The port number related to the action. If you don't have one,
  * pass -1.
@@ -208,7 +210,7 @@ int unload_vehicles(SharedData *shared_data) {
     // Update shared data and calculate vehicles to unload
     sem_wait(&shared_data->lock_mutex);
     int vehicles_to_unload =
-    shared_data->loaded_cars + shared_data->loaded_trucks;
+        shared_data->loaded_cars + shared_data->loaded_trucks;
     shared_data->vehicles_to_unload = vehicles_to_unload;
     shared_data->vehicles_unloaded = 0;
     sem_post(&shared_data->lock_mutex);
@@ -244,8 +246,7 @@ int unload_vehicles(SharedData *shared_data) {
  * loaded, the function returns 0
  */
 int try_load_vehicle(SharedData *shared_data, int port, int is_truck,
-                      int *remaining_capacity, int *vehicle_count) {
-
+                     int *remaining_capacity, int *vehicle_count) {
     int required_space = is_truck ? TRUCK_SIZE : CAR_SIZE;
     // Make a pointer to easily change varible at shared data
     int *waiting = is_truck ? &shared_data->waiting_trucks[port]
@@ -271,7 +272,7 @@ int try_load_vehicle(SharedData *shared_data, int port, int is_truck,
  * @brief Loads vehicles onto the ferry.
  * @param shared_data Pointer to shared data
  * @param cfg Configuration struct
- * 
+ *
  * Loads vehicles onto the ferry in alternating order
  */
 int load_ferry(SharedData *shared_data, Config cfg) {
@@ -286,8 +287,8 @@ int load_ferry(SharedData *shared_data, Config cfg) {
 
         // Try expected type first
         int loaded = try_load_vehicle(shared_data, port,
-                                  shared_data->next_vehicle_is_truck,
-                                  &remaining_capacity, &vehicle_count);
+                                      shared_data->next_vehicle_is_truck,
+                                      &remaining_capacity, &vehicle_count);
         // If not successful, try the other type
         if (!loaded) {
             loaded = try_load_vehicle(shared_data, port,
@@ -396,7 +397,6 @@ void wait_for_loading_signal(SharedData *shared_data, char vehicle_type,
 
 /**
  * @brief Helper function to board a vehicle
- *
  * @param shared_data Pointer to shared data
  * @param cfg Configuration structure containing the parameters for the
  * vehicles.
@@ -420,15 +420,13 @@ void board_vehicle(SharedData *shared_data, Config cfg, char vehicle_type,
 
 /**
  * @brief Helper function to add vehicle to port
- *
  * @param shared_data Pointer to shared data
- * @param cfg Configuration structure containing the parameters for the
- * vehicles.
+ * @param cfg Configuration structure.
  * @param vehicle_type The type of vehicle to add, either 'O' for cars or
  * 'N' for trucks.
  * @param port The port to add the vehicle to.
  */
-void add_vehicle_to_port(SharedData *shared_data,char vehicle_type, int port) {
+void add_vehicle_to_port(SharedData *shared_data, char vehicle_type, int port) {
     sem_wait(&shared_data->lock_mutex);
     if (vehicle_type == 'N') {
         shared_data->waiting_trucks[port]++;
@@ -440,10 +438,8 @@ void add_vehicle_to_port(SharedData *shared_data,char vehicle_type, int port) {
 
 /**
  * @brief Process a vehicle
- *
  * @param shared_data Pointer to shared data
- * @param cfg Configuration structure containing the parameters for the
- * vehicles.
+ * @param cfg Configuration structure
  * @param vehicle_type The type of vehicle to process, either 'O' for cars or
  * 'N' for trucks.
  * @param id The ID of the vehicle.
@@ -492,7 +488,7 @@ void vehicle_process(SharedData *shared_data, Config cfg, char vehicle_type,
 /**
  * @brief Creates a new process for the ferry operation.
  * @param shared_data Pointer to the shared data.
- * @param cfg Configuration structure containing the ferry's parameters.
+ * @param cfg Configuration structure.
  */
 void create_ferry_process(SharedData *shared_data, Config cfg) {
     pid_t ferry_pid = fork();
@@ -554,7 +550,7 @@ int destroy_semaphore(sem_t *sem, const char *sem_name) {
 
 /**
  * @brief Function to clean up shared data and semaphores
- * @param shared_data Pointer to the shared data structure
+ * @param shared_data Pointer to the shared data
  * @return EXIT_SUCCESS if successful, EXIT_FAILURE otherwise
  */
 int cleanup(SharedData *shared_data) {
