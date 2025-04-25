@@ -3,7 +3,7 @@
  * FIT VUT Student
  * https://github.com/sipxi
  * Date: 18/05/2025
- * Time spent: 62h
+ * Time spent: 63h
  */
 #include "main.h"
 
@@ -149,7 +149,7 @@ int rand_range(int min, int max) {
  * opened.
  */
 FILE *file_init(const char *filename) {
-    FILE *file = fopen("proj2.out", "w");
+    FILE *file = fopen(filename, "w");
     if (file == NULL) {
         fprintf(stderr, "[ERROR] Failed to open file\n");
         exit(EXIT_FAILURE);
@@ -204,11 +204,11 @@ void print_action(SharedData *shared_data, FILE *log_file,
  * vehicles unloaded. It also updates shared data and the total number of
  * vehicles unloaded.
  */
-int unload_vehicles(SharedData *shared_data, Config cfg) {
+int unload_vehicles(SharedData *shared_data) {
     // Update shared data and calculate vehicles to unload
     sem_wait(&shared_data->lock_mutex);
     int vehicles_to_unload =
-        shared_data->loaded_cars + shared_data->loaded_trucks;
+    shared_data->loaded_cars + shared_data->loaded_trucks;
     shared_data->vehicles_to_unload = vehicles_to_unload;
     shared_data->vehicles_unloaded = 0;
     sem_post(&shared_data->lock_mutex);
@@ -343,7 +343,7 @@ void ferry_process(SharedData *shared_data, Config cfg) {
         sem_post(&shared_data->lock_mutex);
         // If there are vehicles to unload unload them
         if (curr_vehicles_to_unload > 0) {
-            unload_vehicles(shared_data, cfg);
+            unload_vehicles(shared_data);
             // Wait until all of them reported back
             sem_wait(&shared_data->unload_complete_sem);
         }
@@ -428,8 +428,7 @@ void board_vehicle(SharedData *shared_data, Config cfg, char vehicle_type,
  * 'N' for trucks.
  * @param port The port to add the vehicle to.
  */
-void add_vehicle_to_port(SharedData *shared_data, Config cfg, char vehicle_type,
-                         int port) {
+void add_vehicle_to_port(SharedData *shared_data,char vehicle_type, int port) {
     sem_wait(&shared_data->lock_mutex);
     if (vehicle_type == 'N') {
         shared_data->waiting_trucks[port]++;
@@ -462,7 +461,7 @@ void vehicle_process(SharedData *shared_data, Config cfg, char vehicle_type,
                  port);
 
     // Modify waiting amount at port
-    add_vehicle_to_port(shared_data, cfg, vehicle_type, port);
+    add_vehicle_to_port(shared_data, vehicle_type, port);
 
     // Wait for loading signal
     wait_for_loading_signal(shared_data, vehicle_type, port);

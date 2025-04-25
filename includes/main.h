@@ -8,7 +8,6 @@
 #ifndef MAIN_H
 #define MAIN_H
 #include <semaphore.h>  // sem_t
-#include <stdbool.h>
 #include <stdio.h>   // input output
 #include <stdlib.h>  //stol
 #include <string.h>
@@ -86,10 +85,10 @@ void wait_for_loading_signal(SharedData *shared_data, char vehicle_type,
                              int port);
 void board_vehicle(SharedData *shared_data, Config cfg, char vehicle_type,
                    int id);
-void add_vehicle_to_port(SharedData *shared_data, Config cfg, char vehicle_type,
+void add_vehicle_to_port(SharedData *shared_data, char vehicle_type,
                          int port);
 void ferry_to_another_port(SharedData *shared_data, FILE *log_file);
-int unload_vehicles(SharedData *shared_data, Config cfg);
+int unload_vehicles(SharedData *shared_data);
 int try_load_vehicle(SharedData *shared_data, int port, int is_truck,
     int *remaining_capacity, int *vehicle_count);
 //--- Functions ---

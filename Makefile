@@ -5,7 +5,7 @@
 
 # Compiler and flags
 CC          := gcc
-CFLAGS      := -std=gnu99 -pedantic
+CFLAGS      := -std=gnu99 -Wall -Wextra -Werror -pedantic
 LDFLAGS     := -lc
 
 # Directories
