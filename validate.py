@@ -11,6 +11,7 @@ MAX_CAPACITY = 10
 # Event type definition
 Event = Dict[str, Optional[any]]
 
+
 def parse_output(lines: List[str]) -> List[Event]:
     pattern = re.compile(r"(\d+): (.*?)(?: (\d+))?: (.+?)(?: (\d+))?$")
     events = []
@@ -187,9 +188,9 @@ def check_ferry_capacity(events, car_size, truck_size, max_capacity):
                     boarded_ids.add(vehicle_key)
 
                     if e['type'] == 'N':
-                        load += car_size
-                    elif e['type'] == 'O':
                         load += truck_size
+                    elif e['type'] == 'O':
+                        load += car_size
 
                 if load > max_capacity:
                     print(f"❌ Ferry overloaded: {load} > {max_capacity}")

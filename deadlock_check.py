@@ -12,6 +12,8 @@ def compile_c_program(c_file):
         return False
     return True
 
+
+
 def run_program_with_args(args, timeout=5):
     """Run the compiled C program with arguments and monitor for deadlocks."""
     try:
@@ -36,6 +38,7 @@ def run_test(i, test_args):
         print(f"Deadlock or timeout detected in test {i + 1}!")
         print(stdout)
         print(stderr)
+
 
 def main():
     c_file = "src/main.c"

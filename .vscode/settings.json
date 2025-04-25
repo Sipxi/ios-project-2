@@ -3,6 +3,7 @@
         "mman.h": "c",
         "stdlib.h": "c",
         "time.h": "c",
-        "types.h": "c"
+        "types.h": "c",
+        "main.h": "c"
     }
 }

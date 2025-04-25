@@ -42,6 +42,7 @@ typedef struct {
     int capacity_of_ferry;
     int max_vehicle_arrival_us;
     int max_ferry_arrival_us;
+    FILE *log_file;
 } Config;
 
 typedef struct {
@@ -61,9 +62,8 @@ typedef struct {
     sem_t lock_mutex;
     sem_t vehicle_loading;
     sem_t unload_complete_sem;     // ferry waits on this
-    sem_t load_truck;
-    sem_t load_car;
-    sem_t port_ready[2];
+    sem_t load_truck[2];
+    sem_t load_car[2];
     sem_t loading_done;
 } SharedData;
 
@@ -74,7 +74,7 @@ int rand_range(int min, int max);
 
 
 
-void print_action(SharedData *shared_data, const char vehicle_type, int vehicle_id, const char *action, int port);
+void print_action(SharedData *shared_data,FILE *log_file, const char vehicle_type, int vehicle_id, const char *action, int port);
 void print_shared_data(SharedData *shared_data);
 
 void vehicle_process(SharedData *shared_data, Config cfg, char vehicle_type, int id, int port);
