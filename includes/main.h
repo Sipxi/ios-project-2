@@ -37,11 +37,11 @@
 
 // --- Structs ---
 typedef struct {
-    int num_trucks;
-    int num_cars;
-    int capacity_of_ferry;
-    int max_vehicle_arrival_us;
-    int max_ferry_arrival_us;
+    unsigned short num_trucks;
+    unsigned short num_cars;
+    unsigned short capacity_of_ferry;
+    unsigned short max_vehicle_arrival_us;
+    unsigned short max_ferry_arrival_us;
     FILE *log_file;
 } Config;
 
@@ -67,14 +67,25 @@ typedef struct {
     sem_t loading_done;
 } SharedData;
 
-//--- Functions ---
-SharedData *init_shared_data(Config cfg);
-int parse_args(int argc, char const *argv[], Config *cfg);
+
+//--- Helpers ---
+
+int parse_uint(const char *value_str, unsigned short min, unsigned short max,
+    const char *arg_name, unsigned short *result);
+int destroy_semaphore(sem_t *sem, const char *sem_name);
 int rand_range(int min, int max);
+void wait_for_children();
+//? Exit?
+FILE *file_init(const char *filename);
 
+//--- Functions ---
 
-
+int parse_args(int argc, char const *argv[], Config *cfg);
+//? Too many args?
 void print_action(SharedData *shared_data,FILE *log_file, const char vehicle_type, int vehicle_id, const char *action, int port);
+SharedData *init_shared_data(Config cfg);
+
+
 void print_shared_data(SharedData *shared_data);
 
 void vehicle_process(SharedData *shared_data, Config cfg, char vehicle_type, int id, int port);
@@ -82,7 +93,7 @@ void ferry_process(SharedData *shared_data, Config cfg);
 void create_ferry_process(SharedData *shared_data, Config cfg);
 void create_vehicle_process(SharedData *shared_data, Config cfg, const char vehicle_type);
 
-void wait_for_children();
+
 
 
 #endif

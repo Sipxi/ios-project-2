@@ -1,45 +1,42 @@
-1: P: started
-2: O 1: started
-3: O 2: started
-4: O 3: started
-5: O 4: started
-6: N 1: started
-7: N 2: started
-8: N 3: started
-9: N 4: started
-10: P: arrived to 0
-11: P: leaving 0
-12: O 2: arrived to 1
-13: O 3: arrived to 0
-14: O 4: arrived to 1
-15: N 1: arrived to 0
-16: N 2: arrived to 1
-17: N 3: arrived to 0
-18: N 4: arrived to 0
-19: O 1: arrived to 0
-20: P: arrived to 1
-21: N 2: boarding
-22: O 4: boarding
-23: O 2: boarding
-24: P: leaving 1
-25: P: arrived to 0
-26: N 2: leaving in 0
-27: O 4: leaving in 0
-28: O 2: leaving in 0
-29: O 3: boarding
-30: N 3: boarding
-31: O 1: boarding
-32: N 1: boarding
-33: P: leaving 0
-34: P: arrived to 1
-35: O 3: leaving in 1
-36: N 3: leaving in 1
-37: N 1: leaving in 1
-38: O 1: leaving in 1
-39: P: leaving 1
-40: P: arrived to 0
-41: N 4: boarding
-42: P: leaving 0
-43: P: arrived to 1
-44: N 4: leaving in 1
-45: P: finish
+1: O 2: started
+2: N 1: started
+3: N 2: started
+4: N 3: started
+5: O 1: started
+6: N 4: started
+7: P: started
+8: O 4: started
+9: O 3: started
+10: O 2: arrived to 1
+11: N 1: arrived to 1
+12: N 2: arrived to 1
+13: N 3: arrived to 0
+14: O 1: arrived to 0
+15: N 4: arrived to 0
+16: P: arrived to 0
+17: O 4: arrived to 0
+18: O 3: arrived to 0
+19: N 3: boarding
+20: O 1: boarding
+21: N 4: boarding
+22: P: leaving 0
+23: P: arrived to 1
+24: N 3: leaving in 1
+25: O 1: leaving in 1
+26: N 4: leaving in 1
+27: O 2: boarding
+28: N 1: boarding
+29: N 2: boarding
+30: P: leaving 1
+31: P: arrived to 0
+32: O 2: leaving in 0
+33: N 2: leaving in 0
+34: N 1: leaving in 0
+35: O 3: boarding
+36: O 4: boarding
+37: P: leaving 0
+38: P: arrived to 1
+39: O 3: leaving in 1
+40: O 4: leaving in 1
+41: P: leaving 1
+42: P: finish
