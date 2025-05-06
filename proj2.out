@@ -1,46 +1,2788 @@
 1: P: started
 2: O 1: started
 3: O 2: started
-4: O 3: started
-5: O 3: arrived 6: N 6: N 1: sta7: N 7: N 2: started
-8: N 3: started
-9: N 4: started
-10: P: arrived to 0
-11: P: leaving 0
-12: O 2: arrived to 0
-13: O 4: started
-14: N 1: arrived to 0
-15: N 2: arrived to 1
-16: N 3: arrived to 0
-17: N 4: arrived to 1
-18: O 1: arrived to 0
-19: P: arrived to 1
-20: O 4: arrived to 0
-21: N 2: boarding
-22: O 3: boarding
-23: N 4: boarding
-24: P: leaving 1
-25: P: arrived to 0
-26: N 4: leaving in 0
-27: O 3: leaving in 0
-28: N 2: leaving in 0
-29: O 1: boarding
-30: N 1: boarding
-31: N 3: boarding
-32: O 4: boarding
-33: O 2: boarding
-34: P: leaving 0
-35: P: arrived to 1
-36: N 3: leaving in 1
-37: O 4: leaving in 1
-38: O 2: leaving in 1
-39: O 1: leaving in 1
-40: N 1: leaving in 1
-41: P: leaving 1
-42: P: finish
- in 0
-43: P: leaving 0
-44: P: finish
- in 1
-45: P: leaving 1
-46: P: finish
+4: O 21: started
+5: O 27: started
+6: O 33: started
+7: O 39: started
+8: O 7: started
+9: P: arrived to 0
+10: O 51: started
+11: O 10: started
+12: O 70: started
+13: O 13: started
+14: O 14: started
+15: O 1: arrived to 1
+16: O 15: started
+17: O 16: started
+18: O 17: started
+19: O 18: started
+20: O 19: started
+21: O 20: started
+22: O 323: started
+23: O 326: started
+24: O 2: arrived to 0
+25: O 330: started
+26: O 24: started
+27: O 25: started
+28: O 340: started
+29: O 4: started
+30: O 345: started
+31: O 21: arrived to 0
+32: O 29: started
+33: O 358: started
+34: O 366: started
+35: O 32: started
+36: O 375: started
+37: O 34: started
+38: O 34: arrived to 1
+39: O 35: started
+40: O 27: arrived to 1
+41: O 397: started
+42: O 38: started
+43: O 6: started
+44: O 40: started
+45: O 414: started
+46: O 41: started
+47: O 42: started
+48: O 426: started
+49: O 44: started
+50: O 45: started
+51: O 46: started
+52: O 39: arrived to 0
+53: O 443: started
+54: O 48: started
+55: O 49: started
+56: O 7: arrived to 1
+57: O 50: started
+58: P: leaving 0
+59: O 9: started
+60: O 52: started
+61: O 53: started
+62: O 54: started
+63: O 474: started
+64: O 56: started
+65: O 480: started
+66: O 57: started
+67: O 58: started
+68: O 490: started
+69: O 60: started
+70: O 61: started
+71: O 502: started
+72: O 63: started
+73: O 512: started
+74: O 514: started
+75: O 66: started
+76: O 67: started
+77: O 528: started
+78: O 68: started
+79: O 11: started
+80: O 10: arrived to 0
+81: O 541: started
+82: O 73: started
+83: O 71: started
+84: O 74: started
+85: O 75: started
+86: O 76: started
+87: O 8: started
+88: O 78: started
+89: O 79: started
+90: O 80: started
+91: O 590: started
+92: O 82: started
+93: O 83: started
+94: O 84: started
+95: O 70: arrived to 0
+96: O 608: started
+97: O 86: started
+98: O 88: started
+99: O 89: started
+100: O 90: started
+101: O 628: started
+102: O 91: started
+103: O 92: started
+104: O 93: started
+105: O 94: started
+106: O 95: started
+107: O 96: started
+108: O 97: started
+109: O 12: started
+110: O 13: arrived to 0
+111: O 98: started
+112: O 99: started
+113: O 100: started
+114: O 675: started
+115: O 102: started
+116: O 681: started
+117: O 14: arrived to 1
+118: O 104: started
+119: O 105: started
+120: O 692: started
+121: O 107: started
+122: O 699: started
+123: O 77: started
+124: O 109: started
+125: O 110: started
+126: O 111: started
+127: O 112: started
+128: O 719: started
+129: O 114: started
+130: O 726: started
+131: O 116: started
+132: O 732: started
+133: O 118: started
+134: O 119: started
+135: O 120: started
+136: O 748: started
+137: O 122: started
+138: O 755: started
+139: O 124: started
+140: O 762: started
+141: O 126: started
+142: O 127: started
+143: O 128: started
+144: O 129: started
+145: O 130: started
+146: O 786: started
+147: O 789: started
+148: O 133: started
+149: O 800: started
+150: O 135: started
+151: O 810: started
+152: O 137: started
+153: O 138: started
+154: O 139: started
+155: O 140: started
+156: O 141: started
+157: O 831: started
+158: O 143: started
+159: O 841: started
+160: O 145: started
+161: O 146: started
+162: O 147: started
+163: O 148: started
+164: O 149: started
+165: O 863: started
+166: O 151: started
+167: O 870: started
+168: O 153: started
+169: O 154: started
+170: O 880: started
+171: O 156: started
+172: O 157: started
+173: O 158: started
+174: O 159: started
+175: O 160: started
+176: O 901: started
+177: O 162: started
+178: O 907: started
+179: O 164: started
+180: O 165: started
+181: O 166: started
+182: O 167: started
+183: O 168: started
+184: O 169: started
+185: O 170: started
+186: O 171: started
+187: O 172: started
+188: O 173: started
+189: O 174: started
+190: O 949: started
+191: O 176: started
+192: O 177: started
+193: O 178: started
+194: O 179: started
+195: O 180: started
+196: O 181: started
+197: O 182: started
+198: O 183: started
+199: O 184: started
+200: O 185: started
+201: O 186: started
+202: O 187: started
+203: O 188: started
+204: O 189: started
+205: O 190: started
+206: O 191: started
+207: O 192: started
+208: O 1019: started
+209: O 194: started
+210: O 195: started
+211: O 196: started
+212: O 197: started
+213: O 198: started
+214: O 199: started
+215: O 200: started
+216: O 1057: started
+217: O 202: started
+218: O 1063: started
+219: O 204: started
+220: O 205: started
+221: O 206: started
+222: O 207: started
+223: O 208: started
+224: O 1084: started
+225: O 210: started
+226: O 211: started
+227: O 212: started
+228: O 213: started
+229: O 214: started
+230: O 1104: started
+231: O 216: started
+232: O 1110: started
+233: O 218: started
+234: O 219: started
+235: O 220: started
+236: O 221: started
+237: O 222: started
+238: O 1131: started
+239: O 224: started
+240: O 225: started
+241: O 226: started
+242: O 227: started
+243: O 1149: started
+244: O 229: started
+245: O 230: started
+246: O 231: started
+247: O 232: started
+248: O 1171: started
+249: O 234: started
+250: O 235: started
+251: O 236: started
+252: O 237: started
+253: O 238: started
+254: O 1195: started
+255: O 240: started
+256: O 241: started
+257: O 242: started
+258: O 1212: started
+259: O 244: started
+260: O 245: started
+261: O 246: started
+262: O 247: started
+263: O 248: started
+264: O 249: started
+265: O 250: started
+266: O 1234: started
+267: O 252: started
+268: O 253: started
+269: O 1244: started
+270: O 255: started
+271: O 256: started
+272: O 1254: started
+273: O 258: started
+274: O 259: started
+275: O 260: started
+276: O 261: started
+277: O 262: started
+278: O 263: started
+279: O 1276: started
+280: O 265: started
+281: O 266: started
+282: O 267: started
+283: O 268: started
+284: O 1293: started
+285: O 270: started
+286: O 271: started
+287: O 272: started
+288: O 273: started
+289: O 274: started
+290: O 1312: started
+291: O 276: started
+292: O 277: started
+293: O 1322: started
+294: O 279: started
+295: O 280: started
+296: O 281: started
+297: O 1335: started
+298: O 283: started
+299: O 1342: started
+300: O 1345: started
+301: O 286: started
+302: O 287: started
+303: O 1355: started
+304: O 289: started
+305: O 1359: started
+306: O 291: started
+307: O 292: started
+308: O 293: started
+309: O 294: started
+310: O 295: started
+311: O 1383: started
+312: O 297: started
+313: O 298: started
+314: O 1393: started
+315: O 300: started
+316: O 301: started
+317: O 1403: started
+318: O 303: started
+319: O 304: started
+320: O 305: started
+321: O 306: started
+322: O 15: arrived to 1
+323: O 307: started
+324: O 308: started
+325: O 16: arrived to 1
+326: O 309: started
+327: O 310: started
+328: O 1435: started
+329: O 312: started
+330: O 313: started
+331: O 314: started
+332: O 1448: started
+333: O 315: started
+334: O 316: started
+335: O 317: started
+336: O 18: arrived to 0
+337: O 318: started
+338: O 319: started
+339: O 320: started
+340: O 321: started
+341: O 1478: started
+342: O 19: arrived to 1
+343: O 3: started
+344: O 20: arrived to 0
+345: O 1488: started
+346: O 1491: started
+347: O 22: started
+348: O 1498: started
+349: O 327: started
+350: O 328: started
+351: O 329: started
+352: O 326: arrived to 0
+353: O 23: started
+354: O 331: started
+355: O 332: started
+356: O 333: started
+357: O 334: started
+358: O 330: arrived to 0
+359: O 335: started
+360: O 336: started
+361: O 24: arrived to 1
+362: O 338: started
+363: O 337: started
+364: O 1557: started
+365: O 25: arrived to 1
+366: O 1562: started
+367: O 1566: started
+368: O 343: started
+369: O 344: started
+370: O 1579: started
+371: O 346: started
+372: O 347: started
+373: O 340: arrived to 1
+374: O 4: arrived to 0
+375: O 349: started
+376: O 351: started
+377: O 1604: started
+378: O 348: started
+379: O 28: started
+380: O 350: started
+381: O 354: started
+382: O 355: started
+383: O 345: arrived to 1
+384: O 1626: started
+385: O 30: started
+386: O 1633: started
+387: O 356: started
+388: O 359: started
+389: O 353: started
+390: O 362: started
+391: O 29: arrived to 0
+392: O 361: started
+393: O 363: started
+394: O 364: started
+395: O 365: started
+396: O 31: started
+397: O 358: arrived to 1
+398: O 367: started
+399: O 368: started
+400: O 369: started
+401: O 370: started
+402: O 371: started
+403: O 1685: started
+404: O 372: started
+405: O 373: started
+406: O 374: started
+407: O 5: started
+408: O 1703: started
+409: O 378: started
+410: O 379: started
+411: O 1715: started
+412: O 375: arrived to 1
+413: O 1722: started
+414: O 382: started
+415: O 384: started
+416: O 386: started
+417: O 387: started
+418: O 388: started
+419: O 381: started
+420: O 390: started
+421: O 392: started
+422: O 393: started
+423: O 383: started
+424: O 394: started
+425: O 389: started
+426: O 36: started
+427: O 396: started
+428: O 35: arrived to 0
+429: O 391: started
+430: O 37: started
+431: O 376: started
+432: O 1803: started
+433: O 385: started
+434: O 399: started
+435: O 398: started
+436: O 400: started
+437: O 401: started
+438: O 402: started
+439: O 397: arrived to 0
+440: O 403: started
+441: O 404: started
+442: O 405: started
+443: O 406: started
+444: O 407: started
+445: O 1843: started
+446: O 408: started
+447: O 409: started
+448: O 410: started
+449: O 1856: started
+450: O 6: arrived to 1
+451: O 412: started
+452: O 413: started
+453: O 33: arrived to 0
+454: O 415: started
+455: O 416: started
+456: O 40: arrived to 1
+457: O 417: started
+458: O 418: started
+459: O 1882: started
+460: O 419: started
+461: O 420: started
+462: O 421: started
+463: O 422: started
+464: O 41: arrived to 1
+465: O 1901: started
+466: O 424: started
+467: O 425: started
+468: O 43: started
+469: O 42: arrived to 0
+470: O 427: started
+471: O 428: started
+472: O 429: started
+473: O 430: started
+474: O 426: arrived to 0
+475: O 431: started
+476: O 432: started
+477: O 433: started
+478: O 434: started
+479: O 44: arrived to 1
+480: O 435: started
+481: O 436: started
+482: O 437: started
+483: O 438: started
+484: O 45: arrived to 0
+485: O 1969: started
+486: O 440: started
+487: O 441: started
+488: O 442: started
+489: O 46: arrived to 0
+490: O 1986: started
+491: O 444: started
+492: O 445: started
+493: O 446: started
+494: O 447: started
+495: O 448: started
+496: O 449: started
+497: O 2011: started
+498: O 450: started
+499: O 451: started
+500: O 452: started
+501: O 453: started
+502: O 48: arrived to 1
+503: O 454: started
+504: O 49: arrived to 1
+505: O 2033: started
+506: O 456: started
+507: O 457: started
+508: O 2043: started
+509: O 459: started
+510: O 460: started
+511: O 2053: started
+512: O 461: started
+513: P: arrived to 1
+514: O 462: started
+515: O 463: started
+516: O 464: started
+517: O 9: arrived to 0
+518: O 465: started
+519: O 466: started
+520: O 467: started
+521: O 468: started
+522: O 52: arrived to 1
+523: O 2088: started
+524: O 53: arrived to 0
+525: O 471: started
+526: O 2097: started
+527: O 472: started
+528: O 473: started
+529: O 55: started
+530: O 54: arrived to 1
+531: O 2112: started
+532: O 476: started
+533: O 477: started
+534: O 478: started
+535: O 479: started
+536: O 2130: started
+537: O 474: arrived to 0
+538: O 482: started
+539: O 2138: started
+540: O 2141: started
+541: O 56: arrived to 1
+542: O 484: started
+543: O 485: started
+544: O 2153: started
+545: O 486: started
+546: O 487: started
+547: O 2169: started
+548: O 488: started
+549: O 489: started
+550: O 59: started
+551: O 58: arrived to 1
+552: O 2186: started
+553: O 2190: started
+554: O 493: started
+555: O 494: started
+556: O 2211: started
+557: O 495: started
+558: O 496: started
+559: O 497: started
+560: O 2240: started
+561: O 499: started
+562: O 2251: started
+563: O 2255: started
+564: O 501: started
+565: O 62: started
+566: O 61: arrived to 0
+567: O 503: started
+568: O 2272: started
+569: O 505: started
+570: O 2280: started
+571: O 507: started
+572: O 509: started
+573: O 502: arrived to 1
+574: O 2292: started
+575: O 510: started
+576: O 511: started
+577: O 64: started
+578: O 513: started
+579: O 63: arrived to 1
+580: O 2315: started
+581: O 512: arrived to 1
+582: O 65: started
+583: O 2327: started
+584: O 517: started
+585: O 518: started
+586: O 519: started
+587: O 2349: started
+588: O 520: started
+589: O 521: started
+590: O 522: started
+591: O 2364: started
+592: O 524: started
+593: O 2376: started
+594: O 2380: started
+595: O 526: started
+596: O 2389: started
+597: O 2394: started
+598: O 67: arrived to 0
+599: O 529: started
+600: O 530: started
+601: O 531: started
+602: O 532: started
+603: O 528: arrived to 1
+604: O 533: started
+605: O 534: started
+606: O 2428: started
+607: O 536: started
+608: O 68: arrived to 0
+609: O 537: started
+610: O 538: started
+611: O 539: started
+612: O 2453: started
+613: O 11: arrived to 0
+614: O 72: started
+615: O 2461: started
+616: O 543: started
+617: O 544: started
+618: O 545: started
+619: O 541: arrived to 1
+620: O 546: started
+621: O 547: started
+622: O 2479: started
+623: O 549: started
+624: O 73: arrived to 0
+625: O 550: started
+626: O 2488: started
+627: O 552: started
+628: O 553: started
+629: O 71: arrived to 1
+630: O 554: started
+631: O 555: started
+632: O 556: started
+633: O 2501: started
+634: O 558: started
+635: O 74: arrived to 0
+636: O 559: started
+637: O 2511: started
+638: O 2514: started
+639: O 562: started
+640: O 75: arrived to 1
+641: O 563: started
+642: O 564: started
+643: O 565: started
+644: O 76: arrived to 1
+645: O 566: started
+646: O 567: started
+647: O 568: started
+648: O 569: started
+649: O 571: started
+650: O 572: started
+651: O 8: arrived to 1
+652: O 2568: started
+653: O 2576: started
+654: O 574: started
+655: O 575: started
+656: O 78: arrived to 0
+657: O 576: started
+658: O 577: started
+659: O 578: started
+660: O 579: started
+661: O 79: arrived to 1
+662: O 2613: started
+663: O 581: started
+664: O 2622: started
+665: O 2626: started
+666: O 2630: started
+667: O 586: started
+668: O 587: started
+669: O 2642: started
+670: O 589: started
+671: O 583: started
+672: O 81: started
+673: O 2656: started
+674: O 591: started
+675: O 592: started
+676: O 593: started
+677: O 2671: started
+678: O 595: started
+679: O 2678: started
+680: O 2682: started
+681: O 597: started
+682: O 598: started
+683: O 2691: started
+684: O 2695: started
+685: O 600: started
+686: O 601: started
+687: O 602: started
+688: O 603: started
+689: O 83: arrived to 0
+690: O 604: started
+691: O 605: started
+692: O 606: started
+693: O 607: started
+694: O 84: arrived to 1
+695: O 85: started
+696: O 609: started
+697: O 610: started
+698: O 611: started
+699: O 612: started
+700: O 608: arrived to 0
+701: O 613: started
+702: O 614: started
+703: O 615: started
+704: O 616: started
+705: O 86: arrived to 1
+706: O 2775: started
+707: O 618: started
+708: O 2784: started
+709: O 620: started
+710: O 2793: started
+711: O 621: started
+712: O 622: started
+713: O 623: started
+714: O 624: started
+715: O 89: arrived to 0
+716: O 625: started
+717: O 626: started
+718: O 2826: started
+719: O 87: started
+720: O 90: arrived to 0
+721: O 630: started
+722: O 2840: started
+723: O 631: started
+724: O 632: started
+725: O 2852: started
+726: O 2856: started
+727: O 634: started
+728: O 2865: started
+729: O 2869: started
+730: O 2873: started
+731: O 637: started
+732: O 638: started
+733: O 639: started
+734: O 640: started
+735: O 641: started
+736: O 92: arrived to 0
+737: O 642: started
+738: O 643: started
+739: O 2909: started
+740: O 645: started
+741: O 93: arrived to 1
+742: O 646: started
+743: O 647: started
+744: O 2922: started
+745: O 94: arrived to 1
+746: O 649: started
+747: O 650: started
+748: O 2935: started
+749: O 2938: started
+750: O 2942: started
+751: O 95: arrived to 1
+752: O 654: started
+753: O 655: started
+754: O 2953: started
+755: O 96: arrived to 1
+756: O 657: started
+757: O 658: started
+758: O 2966: started
+759: O 660: started
+760: O 97: arrived to 1
+761: O 661: started
+762: O 662: started
+763: O 663: started
+764: O 12: arrived to 1
+765: O 2983: started
+766: O 2987: started
+767: O 666: started
+768: O 667: started
+769: O 2996: started
+770: O 669: started
+771: O 98: arrived to 0
+772: O 670: started
+773: O 671: started
+774: O 672: started
+775: O 3026: started
+776: O 3034: started
+777: O 3039: started
+778: O 101: started
+779: O 100: arrived to 0
+780: O 676: started
+781: O 677: started
+782: O 678: started
+783: O 675: arrived to 0
+784: O 679: started
+785: O 3071: started
+786: O 103: started
+787: O 3080: started
+788: O 682: started
+789: O 683: started
+790: O 684: started
+791: O 681: arrived to 1
+792: O 685: started
+793: O 3105: started
+794: O 687: started
+795: O 688: started
+796: O 689: started
+797: O 104: arrived to 1
+798: O 3120: started
+799: O 691: started
+800: O 106: started
+801: O 3129: started
+802: O 693: started
+803: O 694: started
+804: O 3139: started
+805: O 696: started
+806: O 692: arrived to 0
+807: O 697: started
+808: O 3153: started
+809: O 3157: started
+810: O 107: arrived to 0
+811: O 700: started
+812: O 701: started
+813: O 702: started
+814: O 699: arrived to 1
+815: O 704: started
+816: O 705: started
+817: O 77: arrived to 0
+818: O 706: started
+819: O 707: started
+820: O 3193: started
+821: O 709: started
+822: O 3199: started
+823: O 710: started
+824: O 711: started
+825: O 713: started
+826: O 110: arrived to 1
+827: O 3218: started
+828: O 3222: started
+829: O 715: started
+830: O 716: started
+831: O 111: arrived to 1
+832: O 3237: started
+833: O 717: started
+834: O 113: started
+835: O 3251: started
+836: O 3255: started
+837: O 721: started
+838: O 722: started
+839: O 723: started
+840: O 719: arrived to 1
+841: O 3284: started
+842: O 725: started
+843: O 115: started
+844: O 114: arrived to 1
+845: O 727: started
+846: O 728: started
+847: O 3313: started
+848: O 3321: started
+849: O 730: started
+850: O 731: started
+851: O 115: arrived to 0
+852: O 3328: started
+853: O 733: started
+854: O 734: started
+855: O 3358: started
+856: O 732: arrived to 1
+857: O 3364: started
+858: O 737: started
+859: O 738: started
+860: O 739: started
+861: O 740: started
+862: O 118: arrived to 0
+863: O 741: started
+864: O 742: started
+865: O 743: started
+866: O 3396: started
+867: O 119: arrived to 1
+868: O 745: started
+869: O 746: started
+870: O 747: started
+871: O 121: started
+872: O 120: arrived to 1
+873: O 3418: started
+874: O 750: started
+875: O 751: started
+876: O 752: started
+877: O 748: arrived to 1
+878: O 753: started
+879: O 3438: started
+880: O 123: started
+881: O 122: arrived to 1
+882: O 756: started
+883: O 757: started
+884: O 3454: started
+885: O 759: started
+886: O 3463: started
+887: O 3467: started
+888: O 3471: started
+889: O 125: started
+890: O 3480: started
+891: O 763: started
+892: O 764: started
+893: O 3494: started
+894: O 766: started
+895: O 762: arrived to 1
+896: O 767: started
+897: O 3509: started
+898: O 3513: started
+899: O 770: started
+900: O 126: arrived to 0
+901: O 3523: started
+902: O 3527: started
+903: O 773: started
+904: O 127: arrived to 1
+905: O 774: started
+906: O 775: started
+907: O 776: started
+908: O 777: started
+909: O 128: arrived to 1
+910: O 778: started
+911: O 3562: started
+912: O 780: started
+913: O 3569: started
+914: O 782: started
+915: O 129: arrived to 0
+916: O 783: started
+917: O 784: started
+918: O 3587: started
+919: O 3588: started
+920: O 130: arrived to 1
+921: O 787: started
+922: O 788: started
+923: O 132: started
+924: O 3606: started
+925: O 3606: arrived to 0
+926: O 791: started
+927: O 792: started
+928: O 793: started
+929: O 794: started
+930: O 789: arrived to 0
+931: O 795: started
+932: O 3660: started
+933: O 3665: started
+934: O 798: started
+935: O 3673: started
+936: O 134: started
+937: O 133: arrived to 1
+938: O 3686: started
+939: O 802: started
+940: O 803: started
+941: O 804: started
+942: O 805: started
+943: O 806: started
+944: O 3725: started
+945: O 807: started
+946: O 808: started
+947: O 809: started
+948: O 136: started
+949: O 3753: started
+950: O 811: started
+951: O 812: started
+952: O 3765: started
+953: O 814: started
+954: O 810: arrived to 0
+955: O 815: started
+956: O 816: started
+957: O 3778: started
+958: O 817: started
+959: O 137: arrived to 0
+960: O 818: started
+961: O 819: started
+962: O 820: started
+963: O 138: arrived to 0
+964: O 821: started
+965: O 822: started
+966: O 823: started
+967: O 139: arrived to 0
+968: O 824: started
+969: O 825: started
+970: O 826: started
+971: O 827: started
+972: O 828: started
+973: O 3848: started
+974: O 829: started
+975: O 830: started
+976: O 142: started
+977: O 141: arrived to 1
+978: O 142: arrived to 1
+979: O 833: started
+980: O 834: started
+981: O 835: started
+982: O 831: arrived to 1
+983: O 836: started
+984: O 837: started
+985: O 838: started
+986: O 839: started
+987: O 840: started
+988: O 144: started
+989: O 143: arrived to 0
+990: O 842: started
+991: O 843: started
+992: O 844: started
+993: O 845: started
+994: O 846: started
+995: O 841: arrived to 0
+996: O 847: started
+997: O 848: started
+998: O 3977: started
+999: O 850: started
+1000: O 145: arrived to 1
+1001: O 851: started
+1002: O 852: started
+1003: O 853: started
+1004: O 146: arrived to 0
+1005: O 854: started
+1006: O 855: started
+1007: O 856: started
+1008: O 857: started
+1009: O 4013: started
+1010: O 858: started
+1011: O 859: started
+1012: O 860: started
+1013: O 3878: started
+1014: O 148: arrived to 0
+1015: O 862: started
+1016: O 150: started
+1017: O 149: arrived to 1
+1018: O 864: started
+1019: O 4052: started
+1020: O 866: started
+1021: O 863: arrived to 0
+1022: O 867: started
+1023: O 869: started
+1024: O 868: started
+1025: O 152: started
+1026: O 151: arrived to 1
+1027: O 871: started
+1028: O 872: started
+1029: O 4097: started
+1030: O 873: started
+1031: O 874: started
+1032: O 875: started
+1033: O 876: started
+1034: O 877: started
+1035: O 153: arrived to 0
+1036: O 878: started
+1037: O 4138: started
+1038: O 155: started
+1039: O 154: arrived to 0
+1040: O 4158: started
+1041: O 882: started
+1042: O 883: started
+1043: O 4178: started
+1044: O 880: arrived to 0
+1045: O 885: started
+1046: O 886: started
+1047: O 887: started
+1048: O 156: arrived to 1
+1049: O 888: started
+1050: O 889: started
+1051: O 890: started
+1052: O 4205: started
+1053: O 891: started
+1054: O 892: started
+1055: O 893: started
+1056: O 894: started
+1057: O 158: arrived to 1
+1058: O 895: started
+1059: O 896: started
+1060: O 4235: started
+1061: O 898: started
+1062: O 4241: started
+1063: O 899: started
+1064: O 900: started
+1065: O 161: started
+1066: O 160: arrived to 0
+1067: O 4262: started
+1068: O 903: started
+1069: O 904: started
+1070: O 901: arrived to 0
+1071: O 905: started
+1072: O 906: started
+1073: O 163: started
+1074: O 162: arrived to 1
+1075: O 908: started
+1076: O 909: started
+1077: O 910: started
+1078: O 4306: started
+1079: O 911: started
+1080: O 912: started
+1081: O 913: started
+1082: O 164: arrived to 1
+1083: O 914: started
+1084: O 915: started
+1085: O 916: started
+1086: O 4348: started
+1087: O 165: arrived to 0
+1088: O 918: started
+1089: O 919: started
+1090: O 920: started
+1091: O 921: started
+1092: O 166: arrived to 1
+1093: O 4378: started
+1094: O 923: started
+1095: O 924: started
+1096: O 925: started
+1097: O 4394: started
+1098: O 926: started
+1099: O 927: started
+1100: O 168: arrived to 0
+1101: O 929: started
+1102: O 928: started
+1103: O 930: started
+1104: O 931: started
+1105: O 932: started
+1106: O 169: arrived to 0
+1107: O 933: started
+1108: O 934: started
+1109: O 935: started
+1110: O 936: started
+1111: O 170: arrived to 1
+1112: O 937: started
+1113: O 4438: started
+1114: O 171: arrived to 1
+1115: O 4442: started
+1116: O 939: started
+1117: O 4451: started
+1118: O 4456: started
+1119: O 172: arrived to 0
+1120: O 943: started
+1121: O 944: started
+1122: O 945: started
+1123: O 946: started
+1124: O 4515: started
+1125: O 4514: started
+1126: O 948: started
+1127: O 175: started
+1128: O 4537: started
+1129: O 950: started
+1130: O 951: started
+1131: O 949: arrived to 1
+1132: O 951: arrived to 0
+1133: O 953: started
+1134: O 4576: started
+1135: O 955: started
+1136: O 956: started
+1137: O 176: arrived to 1
+1138: O 957: started
+1139: O 958: started
+1140: O 959: started
+1141: O 177: arrived to 0
+1142: O 960: started
+1143: O 4611: started
+1144: O 962: started
+1145: O 178: arrived to 1
+1146: O 963: started
+1147: O 4621: started
+1148: O 965: started
+1149: O 966: started
+1150: O 4632: started
+1151: O 179: arrived to 0
+1152: O 968: started
+1153: O 4639: started
+1154: O 4642: started
+1155: O 4647: started
+1156: O 4554: started
+1157: O 972: started
+1158: O 973: started
+1159: O 4665: started
+1160: O 975: started
+1161: O 181: arrived to 0
+1162: O 4677: started
+1163: O 977: started
+1164: O 978: started
+1165: O 4693: started
+1166: O 182: arrived to 0
+1167: O 980: started
+1168: O 981: started
+1169: O 982: started
+1170: O 183: arrived to 1
+1171: O 983: started
+1172: O 4720: started
+1173: O 4726: started
+1174: O 986: started
+1175: O 4720: arrived to 0
+1176: O 987: started
+1177: O 988: started
+1178: O 989: started
+1179: O 4754: started
+1180: O 991: started
+1181: O 4759: started
+1182: O 992: started
+1183: O 993: started
+1184: O 4771: started
+1185: O 186: arrived to 1
+1186: O 995: started
+1187: O 996: started
+1188: O 997: started
+1189: O 4783: started
+1190: O 187: arrived to 1
+1191: O 4784: started
+1192: O 1000: started
+1193: O 1001: started
+1194: O 1002: started
+1195: O 4804: started
+1196: O 4733: started
+1197: O 1004: started
+1198: O 1005: started
+1199: O 1006: started
+1200: O 189: arrived to 1
+1201: O 1007: started
+1202: O 1008: started
+1203: O 1009: started
+1204: O 1010: started
+1205: O 5019: started
+1206: O 1012: started
+1207: O 1013: started
+1208: O 190: arrived to 1
+1209: O 191: arrived to 0
+1210: O 1014: started
+1211: O 1015: started
+1212: O 5043: started
+1213: O 1017: started
+1214: O 1018: started
+1215: O 193: started
+1216: O 192: arrived to 1
+1217: O 1020: started
+1218: O 1021: started
+1219: O 1022: started
+1220: O 1023: started
+1221: O 1019: arrived to 1
+1222: O 5070: started
+1223: O 1025: started
+1224: O 1026: started
+1225: O 1027: started
+1226: O 5089: started
+1227: O 5093: started
+1228: O 1029: started
+1229: O 5101: started
+1230: O 1031: started
+1231: O 1032: started
+1232: O 1033: started
+1233: O 1034: started
+1234: O 5121: started
+1235: O 5128: started
+1236: O 1037: started
+1237: O 1038: started
+1238: O 5143: started
+1239: O 1038: arrived to 1
+1240: O 1040: started
+1241: O 5144: started
+1242: O 1042: started
+1243: O 196: arrived to 1
+1244: O 1042: arrived to 1
+1245: O 1044: started
+1246: O 1045: started
+1247: O 1046: started
+1248: O 197: arrived to 1
+1249: O 1047: started
+1250: O 1048: started
+1251: O 5223: started
+1252: O 1050: started
+1253: O 5235: started
+1254: O 5162: started
+1255: O 1052: started
+1256: O 1053: started
+1257: O 5247: started
+1258: O 199: arrived to 1
+1259: O 1055: started
+1260: O 1056: started
+1261: O 201: started
+1262: O 200: arrived to 1
+1263: O 1058: started
+1264: O 1059: started
+1265: O 1060: started
+1266: O 5270: started
+1267: O 1057: arrived to 0
+1268: O 1062: started
+1269: O 203: started
+1270: O 202: arrived to 0
+1271: O 5287: started
+1272: O 1065: started
+1273: O 1066: started
+1274: O 1067: started
+1275: O 1063: arrived to 1
+1276: O 1068: started
+1277: O 1069: started
+1278: O 1070: started
+1279: O 204: arrived to 1
+1280: O 1071: started
+1281: O 5322: started
+1282: O 1073: started
+1283: O 1074: started
+1284: O 205: arrived to 1
+1285: O 1075: started
+1286: O 5350: started
+1287: O 1077: started
+1288: O 5365: started
+1289: O 1078: started
+1290: O 1079: started
+1291: O 1080: started
+1292: O 5380: started
+1293: O 207: arrived to 1
+1294: O 1082: started
+1295: O 1083: started
+1296: O 209: started
+1297: O 208: arrived to 1
+1298: O 1085: started
+1299: O 1086: started
+1300: O 1087: started
+1301: O 5405: started
+1302: O 1084: arrived to 1
+1303: O 5411: started
+1304: O 1090: started
+1305: O 5419: started
+1306: O 1091: started
+1307: O 1092: started
+1308: O 1093: started
+1309: O 5433: started
+1310: O 211: arrived to 1
+1311: O 1095: started
+1312: O 1096: started
+1313: O 1097: started
+1314: O 1098: started
+1315: O 5459: started
+1316: O 212: arrived to 0
+1317: O 1100: started
+1318: O 1101: started
+1319: O 5472: started
+1320: O 1102: started
+1321: O 1103: started
+1322: O 215: started
+1323: O 214: arrived to 0
+1324: O 1105: started
+1325: O 5492: started
+1326: O 1107: started
+1327: O 1104: arrived to 1
+1328: O 1108: started
+1329: O 5508: started
+1330: O 217: started
+1331: O 216: arrived to 0
+1332: O 1111: started
+1333: O 1112: started
+1334: O 1113: started
+1335: O 1114: started
+1336: O 1110: arrived to 1
+1337: O 1115: started
+1338: O 5589: started
+1339: O 218: arrived to 1
+1340: O 5593: started
+1341: O 5635: started
+1342: O 1119: started
+1343: O 5674: started
+1344: O 219: arrived to 1
+1345: O 5698: started
+1346: O 5661: started
+1347: O 5712: started
+1348: O 1122: started
+1349: O 220: arrived to 0
+1350: O 5661: arrived to 0
+1351: O 1126: started
+1352: O 5717: started
+1353: O 5719: started
+1354: O 5719: arrived to 0
+1355: O 5722: started
+1356: O 5727: started
+1357: O 223: started
+1358: O 222: arrived to 0
+1359: O 1132: started
+1360: O 1133: started
+1361: O 1134: started
+1362: O 1131: arrived to 0
+1363: O 1135: started
+1364: O 1136: started
+1365: O 1137: started
+1366: O 224: arrived to 1
+1367: O 1138: started
+1368: O 5739: started
+1369: O 1140: started
+1370: O 1141: started
+1371: O 5801: started
+1372: O 5802: started
+1373: O 1143: started
+1374: O 1144: started
+1375: O 5813: started
+1376: O 5817: started
+1377: O 226: arrived to 0
+1378: O 1147: started
+1379: O 228: started
+1380: O 1148: started
+1381: O 227: arrived to 1
+1382: O 1150: started
+1383: O 5842: started
+1384: O 1152: started
+1385: O 1153: started
+1386: O 1149: arrived to 0
+1387: O 1154: started
+1388: O 1155: started
+1389: O 1156: started
+1390: O 1157: started
+1391: O 229: arrived to 0
+1392: O 1158: started
+1393: O 5867: started
+1394: O 1160: started
+1395: O 230: arrived to 1
+1396: O 1161: started
+1397: O 1162: started
+1398: O 5919: started
+1399: O 1164: started
+1400: O 231: arrived to 0
+1401: O 1165: started
+1402: O 1166: started
+1403: O 1167: started
+1404: O 1168: started
+1405: O 1169: started
+1406: O 1170: started
+1407: O 233: started
+1408: O 5942: started
+1409: O 1172: started
+1410: O 5949: started
+1411: O 1173: started
+1412: O 1171: arrived to 1
+1413: O 1175: started
+1414: O 5960: started
+1415: O 1177: started
+1416: O 5966: started
+1417: O 5966: arrived to 0
+1418: O 234: arrived to 0
+1419: O 1180: started
+1420: O 1181: started
+1421: O 5980: started
+1422: O 1183: started
+1423: O 5987: started
+1424: O 235: arrived to 1
+1425: O 1185: started
+1426: O 5997: started
+1427: O 1187: started
+1428: O 236: arrived to 0
+1429: O 1188: started
+1430: O 1189: started
+1431: O 1190: started
+1432: O 1191: started
+1433: O 1192: started
+1434: O 237: arrived to 0
+1435: O 1193: started
+1436: O 1194: started
+1437: O 239: started
+1438: O 238: arrived to 0
+1439: O 1196: started
+1440: O 1197: started
+1441: O 6065: started
+1442: O 6068: started
+1443: O 1195: arrived to 0
+1444: O 6073: started
+1445: O 1201: started
+1446: O 6078: started
+1447: O 1203: started
+1448: O 6083: started
+1449: O 1204: started
+1450: O 6088: started
+1451: O 1206: started
+1452: O 1207: started
+1453: O 1208: started
+1454: O 6060: started
+1455: O 6103: started
+1456: O 6106: started
+1457: O 1211: started
+1458: O 243: started
+1459: O 242: arrived to 1
+1460: O 6111: started
+1461: O 1214: started
+1462: O 1215: started
+1463: O 1216: started
+1464: O 1212: arrived to 0
+1465: O 1217: started
+1466: O 1218: started
+1467: O 1219: started
+1468: O 244: arrived to 1
+1469: O 6141: started
+1470: O 1221: started
+1471: O 1222: started
+1472: O 1223: started
+1473: O 1224: started
+1474: O 1225: started
+1475: O 246: arrived to 0
+1476: O 1226: started
+1477: O 1227: started
+1478: O 6172: started
+1479: O 247: arrived to 0
+1480: O 1229: started
+1481: O 245: arrived to 0
+1482: O 248: arrived to 0
+1483: O 6199: started
+1484: O 1231: started
+1485: O 6208: started
+1486: O 6212: started
+1487: O 6218: started
+1488: O 251: started
+1489: O 250: arrived to 1
+1490: O 1235: started
+1491: O 1236: started
+1492: O 1237: started
+1493: O 1238: started
+1494: O 1234: arrived to 1
+1495: O 1239: started
+1496: O 1240: started
+1497: O 1241: started
+1498: O 252: arrived to 1
+1499: O 1242: started
+1500: O 1243: started
+1501: O 254: started
+1502: O 253: arrived to 0
+1503: O 6286: started
+1504: O 1246: started
+1505: O 1247: started
+1506: O 6295: started
+1507: O 1244: arrived to 1
+1508: O 1249: started
+1509: O 1250: started
+1510: O 1251: started
+1511: O 255: arrived to 0
+1512: O 1252: started
+1513: O 1253: started
+1514: O 257: started
+1515: O 256: arrived to 0
+1516: O 6317: started
+1517: O 1256: started
+1518: O 1257: started
+1519: O 1254: arrived to 1
+1520: O 1258: started
+1521: O 1259: started
+1522: O 6336: started
+1523: O 1261: started
+1524: O 258: arrived to 0
+1525: O 1262: started
+1526: O 1263: started
+1527: O 6357: started
+1528: O 6359: started
+1529: O 1265: started
+1530: O 1266: started
+1531: O 6375: started
+1532: O 6378: started
+1533: O 1268: started
+1534: O 1269: started
+1535: O 261: arrived to 1
+1536: O 6415: started
+1537: O 1271: started
+1538: O 6424: started
+1539: O 6432: started
+1540: O 1271: arrived to 0
+1541: O 1274: started
+1542: O 1275: started
+1543: O 6453: started
+1544: O 6457: started
+1545: O 1277: started
+1546: O 1278: started
+1547: O 1279: started
+1548: O 1276: arrived to 1
+1549: O 1280: started
+1550: O 1281: started
+1551: O 1282: started
+1552: O 1283: started
+1553: O 265: arrived to 0
+1554: O 1284: started
+1555: O 6513: started
+1556: O 6448: started
+1557: O 6519: started
+1558: O 1286: started
+1559: O 1288: started
+1560: O 1289: started
+1561: O 267: arrived to 0
+1562: O 1291: started
+1563: O 1290: started
+1564: O 1292: started
+1565: O 269: started
+1566: O 268: arrived to 0
+1567: O 1294: started
+1568: O 6560: started
+1569: O 1296: started
+1570: O 6567: started
+1571: O 1297: started
+1572: O 1298: started
+1573: O 1299: started
+1574: O 270: arrived to 0
+1575: O 1300: started
+1576: O 6552: started
+1577: O 1302: started
+1578: O 271: arrived to 1
+1579: O 1303: started
+1580: O 1304: started
+1581: O 1304: arrived to 0
+1582: O 6621: started
+1583: O 6627: started
+1584: O 1307: started
+1585: O 1308: started
+1586: O 1309: started
+1587: O 6641: started
+1588: O 1310: started
+1589: O 1311: started
+1590: O 275: started
+1591: O 6655: started
+1592: O 1313: started
+1593: O 1314: started
+1594: O 1315: started
+1595: O 1312: arrived to 0
+1596: O 1316: started
+1597: O 1317: started
+1598: O 1318: started
+1599: O 1319: started
+1600: O 276: arrived to 1
+1601: O 1319: arrived to 0
+1602: O 1321: started
+1603: O 6700: started
+1604: O 6648: started
+1605: O 6705: started
+1606: O 1324: started
+1607: O 1325: started
+1608: O 1322: arrived to 1
+1609: O 1326: started
+1610: O 1327: started
+1611: O 1328: started
+1612: O 279: arrived to 0
+1613: O 1329: started
+1614: O 6731: started
+1615: O 1331: started
+1616: O 6743: started
+1617: O 6696: started
+1618: O 1333: started
+1619: O 1334: started
+1620: O 282: started
+1621: O 281: arrived to 0
+1622: O 1336: started
+1623: O 1337: started
+1624: O 1335: arrived to 0
+1625: O 1339: started
+1626: O 1338: started
+1627: O 6804: started
+1628: O 1341: started
+1629: O 284: started
+1630: O 283: arrived to 1
+1631: O 1343: started
+1632: O 6823: started
+1633: O 6828: started
+1634: O 1342: arrived to 1
+1635: O 6835: started
+1636: O 1347: started
+1637: O 1348: started
+1638: O 1345: arrived to 0
+1639: O 1350: started
+1640: O 6858: started
+1641: O 1351: started
+1642: O 1352: started
+1643: O 6867: started
+1644: O 6872: started
+1645: O 1354: started
+1646: O 288: started
+1647: O 287: arrived to 1
+1648: O 1356: started
+1649: O 6883: started
+1650: O 6886: started
+1651: O 1355: arrived to 0
+1652: O 6886: arrived to 1
+1653: O 1361: started
+1654: O 1362: started
+1655: O 290: started
+1656: O 1363: started
+1657: O 289: arrived to 0
+1658: O 1364: started
+1659: O 6908: started
+1660: O 1366: started
+1661: O 6918: started
+1662: O 6922: started
+1663: O 1368: started
+1664: O 1369: started
+1665: O 1370: started
+1666: O 291: arrived to 1
+1667: O 1371: started
+1668: O 1372: started
+1669: O 1373: started
+1670: O 292: arrived to 0
+1671: O 6972: started
+1672: O 1375: started
+1673: O 1376: started
+1674: O 1377: started
+1675: O 293: arrived to 0
+1676: O 1378: started
+1677: O 1379: started
+1678: O 1380: started
+1679: O 294: arrived to 0
+1680: O 1381: started
+1681: O 1382: started
+1682: O 296: started
+1683: O 295: arrived to 1
+1684: O 1384: started
+1685: O 1385: started
+1686: O 1386: started
+1687: O 1387: started
+1688: O 1383: arrived to 1
+1689: O 1388: started
+1690: O 1389: started
+1691: O 1390: started
+1692: O 7067: started
+1693: O 7067: arrived to 0
+1694: O 1392: started
+1695: O 299: started
+1696: O 298: arrived to 1
+1697: O 1394: started
+1698: O 1395: started
+1699: O 7089: started
+1700: O 7089: arrived to 1
+1701: O 1393: arrived to 1
+1702: O 1398: started
+1703: O 7101: started
+1704: O 7101: arrived to 1
+1705: O 300: arrived to 0
+1706: O 1401: started
+1707: O 1402: started
+1708: O 302: started
+1709: O 301: arrived to 1
+1710: O 1404: started
+1711: O 7135: started
+1712: O 1406: started
+1713: O 7146: started
+1714: O 1407: started
+1715: O 7154: started
+1716: O 7157: started
+1717: O 7159: started
+1718: O 303: arrived to 0
+1719: O 1411: started
+1720: O 7176: started
+1721: O 7170: started
+1722: O 304: arrived to 0
+1723: O 1414: started
+1724: O 1415: started
+1725: O 7192: started
+1726: O 305: arrived to 1
+1727: O 1417: started
+1728: O 1418: started
+1729: O 1419: started
+1730: O 7222: started
+1731: O 7233: started
+1732: O 7244: started
+1733: O 7247: started
+1734: O 1423: started
+1735: O 7254: started
+1736: O 7258: started
+1737: O 1425: started
+1738: O 7267: started
+1739: O 7269: started
+1740: O 308: arrived to 1
+1741: O 1428: started
+1742: O 1429: started
+1743: O 1430: started
+1744: O 1431: started
+1745: O 7280: started
+1746: O 309: arrived to 1
+1747: O 1433: started
+1748: O 1434: started
+1749: O 7287: started
+1750: O 310: arrived to 0
+1751: O 1436: started
+1752: O 7293: started
+1753: O 7297: started
+1754: O 7300: started
+1755: O 1439: started
+1756: O 7307: started
+1757: O 7320: started
+1758: O 7313: started
+1759: O 312: arrived to 1
+1760: O 7319: started
+1761: O 7340: started
+1762: O 1445: started
+1763: O 313: arrived to 1
+1764: O 1446: started
+1765: O 7390: started
+1766: O 17: arrived to 0
+1767: O 314: arrived to 0
+1768: O 7399: started
+1769: O 7408: started
+1770: O 1451: started
+1771: O 1452: started
+1772: O 1448: arrived to 0
+1773: O 1453: started
+1774: O 1454: started
+1775: O 315: arrived to 1
+1776: O 7436: started
+1777: O 7436: arrived to 1
+1778: O 7443: started
+1779: O 7450: started
+1780: O 7454: started
+1781: O 1460: started
+1782: O 1459: started
+1783: O 1461: started
+1784: O 1462: started
+1785: O 1463: started
+1786: O 317: arrived to 0
+1787: O 1464: started
+1788: O 1465: started
+1789: O 1466: started
+1790: O 1467: started
+1791: O 318: arrived to 1
+1792: O 1468: started
+1793: O 1469: started
+1794: O 1470: started
+1795: O 319: arrived to 1
+1796: O 1472: started
+1797: O 1471: started
+1798: O 1473: started
+1799: O 1474: started
+1800: O 1475: started
+1801: O 320: arrived to 0
+1802: O 1476: started
+1803: O 7522: started
+1804: O 322: started
+1805: O 321: arrived to 1
+1806: O 1479: started
+1807: O 1480: started
+1808: O 1481: started
+1809: O 7541: started
+1810: O 7545: started
+1811: O 1483: started
+1812: O 1484: started
+1813: O 1485: started
+1814: O 1486: started
+1815: O 1486: arrived to 1
+1816: O 1487: started
+1817: O 324: started
+1818: O 1489: started
+1819: O 1490: started
+1820: O 7567: started
+1821: O 7570: started
+1822: O 1492: started
+1823: O 1493: started
+1824: O 1494: started
+1825: O 1495: started
+1826: O 1491: arrived to 0
+1827: O 1496: started
+1828: O 1497: started
+1829: O 7597: started
+1830: O 1499: started
+1831: O 7611: started
+1832: O 7625: started
+1833: O 7633: started
+1834: O 7637: started
+1835: O 1502: started
+1836: O 1503: started
+1837: O 7647: started
+1838: O 1505: started
+1839: O 327: arrived to 1
+1840: O 1506: started
+1841: O 1507: started
+1842: O 1509: started
+1843: O 328: arrived to 0
+1844: O 1510: started
+1845: O 1511: started
+1846: O 7699: started
+1847: O 7703: started
+1848: O 1514: started
+1849: O 1515: started
+1850: O 1516: started
+1851: O 1508: started
+1852: O 1517: started
+1853: O 1518: started
+1854: O 329: arrived to 0
+1855: O 1519: started
+1856: O 1520: started
+1857: O 1521: started
+1858: O 1522: started
+1859: O 1523: started
+1860: O 1523: arrived to 1
+1861: O 1524: started
+1862: O 1525: started
+1863: O 1526: started
+1864: O 1527: started
+1865: O 1528: started
+1866: O 331: arrived to 1
+1867: O 1529: started
+1868: O 7772: started
+1869: O 1531: started
+1870: O 1532: started
+1871: O 7781: started
+1872: O 7784: started
+1873: O 1534: started
+1874: O 7789: started
+1875: O 1536: started
+1876: O 7796: started
+1877: O 7800: started
+1878: O 1538: started
+1879: O 334: arrived to 0
+1880: O 7804: started
+1881: O 1539: started
+1882: O 1541: started
+1883: O 1542: started
+1884: O 7817: started
+1885: O 1544: started
+1886: O 1545: started
+1887: O 7828: started
+1888: O 1546: started
+1889: O 1547: started
+1890: O 1548: started
+1891: O 7844: started
+1892: O 7847: started
+1893: O 7851: started
+1894: O 7856: started
+1895: O 7860: started
+1896: O 7869: started
+1897: O 7882: started
+1898: O 338: arrived to 1
+1899: O 7894: started
+1900: O 1556: started
+1901: O 339: started
+1902: O 7908: started
+1903: O 7912: started
+1904: O 7917: started
+1905: O 7921: started
+1906: O 7925: started
+1907: O 7928: started
+1908: O 1561: started
+1909: O 1563: started
+1910: O 1564: started
+1911: O 1565: started
+1912: O 26: started
+1913: O 7947: started
+1914: O 1567: started
+1915: O 1568: started
+1916: O 1569: started
+1917: O 1566: arrived to 1
+1918: O 341: started
+1919: O 1570: started
+1920: O 8094: started
+1921: O 8099: started
+1922: O 8107: started
+1923: O 8119: started
+1924: O 8122: started
+1925: O 1576: started
+1926: O 8131: started
+1927: O 1578: started
+1928: O 342: started
+1929: O 344: arrived to 1
+1930: O 1580: started
+1931: O 1581: started
+1932: O 1582: started
+1933: O 1583: started
+1934: O 1579: arrived to 0
+1935: O 8160: started
+1936: O 1585: started
+1937: O 8109: started
+1938: O 1587: started
+1939: O 1588: started
+1940: O 346: arrived to 1
+1941: O 1589: started
+1942: O 1590: started
+1943: O 1591: started
+1944: O 1592: started
+1945: O 347: arrived to 1
+1946: O 1593: started
+1947: O 1594: started
+1948: O 1595: started
+1949: O 1596: started
+1950: O 1597: started
+1951: O 8193: started
+1952: O 1599: started
+1953: O 1600: started
+1954: O 349: arrived to 0
+1955: O 1601: started
+1956: O 1602: started
+1957: O 8210: started
+1958: O 8214: started
+1959: O 8221: started
+1960: O 1605: started
+1961: O 1606: started
+1962: O 1607: started
+1963: O 8245: started
+1964: O 1604: arrived to 1
+1965: O 8252: started
+1966: O 1610: started
+1967: O 1611: started
+1968: O 1612: started
+1969: O 8272: started
+1970: O 352: started
+1971: O 8385: started
+1972: O 1615: started
+1973: O 28: arrived to 1
+1974: O 1616: started
+1975: O 1617: started
+1976: O 1618: started
+1977: O 8404: started
+1978: O 1619: started
+1979: O 1620: started
+1980: O 1621: started
+1981: O 354: arrived to 0
+1982: O 1622: started
+1983: O 8432: started
+1984: O 8437: started
+1985: O 355: arrived to 1
+1986: O 8444: started
+1987: O 357: started
+1988: O 1627: started
+1989: O 8461: started
+1990: O 8465: started
+1991: O 1630: started
+1992: O 1626: arrived to 0
+1993: O 8480: started
+1994: O 8486: started
+1995: O 8486: arrived to 0
+1996: O 360: started
+1997: O 1634: started
+1998: O 1635: started
+1999: O 8501: started
+2000: O 8504: started
+2001: O 8506: started
+2002: O 1638: started
+2003: O 1639: started
+2004: O 1640: started
+2005: O 356: arrived to 0
+2006: O 8517: started
+2007: O 1642: started
+2008: O 1643: started
+2009: O 8525: started
+2010: O 8526: started
+2011: O 8536: started
+2012: O 1646: started
+2013: O 353: arrived to 1
+2014: O 8545: started
+2015: O 1648: started
+2016: O 1649: started
+2017: O 362: arrived to 0
+2018: O 1650: started
+2019: O 1651: started
+2020: O 1652: started
+2021: O 1653: started
+2022: O 361: arrived to 1
+2023: O 8603: started
+2024: O 1655: started
+2025: O 1656: started
+2026: O 363: arrived to 1
+2027: O 1657: started
+2028: O 1658: started
+2029: O 1659: started
+2030: O 364: arrived to 0
+2031: O 8627: started
+2032: O 8630: started
+2033: O 8634: started
+2034: O 1663: started
+2035: O 365: arrived to 1
+2036: O 1664: started
+2037: O 1665: started
+2038: O 1666: started
+2039: O 8656: started
+2040: O 31: arrived to 1
+2041: O 1668: started
+2042: O 8669: started
+2043: O 8676: started
+2044: O 8682: started
+2045: O 367: arrived to 1
+2046: O 1672: started
+2047: O 1673: started
+2048: O 1674: started
+2049: O 368: arrived to 0
+2050: O 1675: started
+2051: O 1676: started
+2052: O 1677: started
+2053: O 1678: started
+2054: O 369: arrived to 1
+2055: O 1679: started
+2056: O 8718: started
+2057: O 8725: started
+2058: O 1682: started
+2059: O 370: arrived to 0
+2060: O 1683: started
+2061: O 1684: started
+2062: O 366: arrived to 0
+2063: O 371: arrived to 1
+2064: O 8754: started
+2065: O 1688: started
+2066: O 1687: started
+2067: O 8769: started
+2068: O 8772: started
+2069: O 8777: started
+2070: O 8734: started
+2071: O 8789: started
+2072: O 1692: started
+2073: O 1693: started
+2074: O 1694: started
+2075: O 8802: started
+2076: O 8805: started
+2077: O 8809: started
+2078: O 1697: started
+2079: O 1698: started
+2080: O 8818: started
+2081: O 8824: started
+2082: O 8824: arrived to 1
+2083: O 1701: started
+2084: O 1702: started
+2085: O 8837: started
+2086: O 8840: started
+2087: O 5: arrived to 1
+2088: O 8849: started
+2089: O 1704: started
+2090: O 1707: started
+2091: O 9017: started
+2092: O 1708: started
+2093: O 9026: started
+2094: O 9031: started
+2095: O 9036: started
+2096: O 9041: started
+2097: O 9046: started
+2098: O 9052: started
+2099: O 9057: started
+2100: O 32: arrived to 1
+2101: O 379: arrived to 0
+2102: O 1716: started
+2103: O 1717: started
+2104: O 9074: started
+2105: O 9081: started
+2106: O 1720: started
+2107: O 1721: started
+2108: O 9137: started
+2109: O 380: started
+2110: O 1723: started
+2111: O 1724: started
+2112: O 9158: started
+2113: O 9169: started
+2114: O 9158: arrived to 1
+2115: O 1728: started
+2116: O 9180: started
+2117: O 1730: started
+2118: O 9189: started
+2119: O 9194: started
+2120: O 9198: started
+2121: O 1733: started
+2122: O 1732: started
+2123: O 1734: started
+2124: O 1735: started
+2125: O 1736: started
+2126: O 1737: started
+2127: O 384: arrived to 1
+2128: O 1738: started
+2129: O 1739: started
+2130: O 1740: started
+2131: O 386: arrived to 1
+2132: O 9261: started
+2133: O 9265: started
+2134: O 1743: started
+2135: O 1744: started
+2136: O 9276: started
+2137: O 1746: started
+2138: O 1745: started
+2139: O 1747: started
+2140: O 1748: started
+2141: O 9294: started
+2142: O 9297: started
+2143: O 9297: arrived to 0
+2144: O 9249: started
+2145: O 9306: started
+2146: O 1753: started
+2147: O 381: arrived to 0
+2148: O 1753: arrived to 0
+2149: O 1755: started
+2150: O 1757: started
+2151: O 9325: started
+2152: O 9325: arrived to 0
+2153: O 1758: started
+2154: O 1759: started
+2155: O 1752: started
+2156: O 9327: started
+2157: O 9429: started
+2158: O 9480: started
+2159: O 1763: started
+2160: O 1764: started
+2161: O 9495: started
+2162: O 9495: arrived to 0
+2163: O 1766: started
+2164: O 1767: started
+2165: O 1768: started
+2166: O 1769: started
+2167: O 9511: started
+2168: O 383: arrived to 1
+2169: O 1771: started
+2170: O 1772: started
+2171: O 9524: started
+2172: O 1774: started
+2173: O 394: arrived to 0
+2174: O 9534: started
+2175: O 9539: started
+2176: O 9543: started
+2177: O 1778: started
+2178: O 389: arrived to 1
+2179: O 1779: started
+2180: O 9557: started
+2181: O 1782: started
+2182: O 9566: started
+2183: O 9570: started
+2184: O 1784: started
+2185: O 9580: started
+2186: O 9583: started
+2187: O 1786: started
+2188: O 1787: started
+2189: O 1788: started
+2190: O 396: arrived to 0
+2191: O 1789: started
+2192: O 9611: started
+2193: O 9616: started
+2194: O 9621: started
+2195: O 9635: started
+2196: O 9658: started
+2197: O 391: arrived to 0
+2198: O 1795: started
+2199: O 1796: started
+2200: O 9674: started
+2201: O 9644: started
+2202: O 37: arrived to 0
+2203: O 1799: started
+2204: O 1800: started
+2205: O 1801: started
+2206: O 1802: started
+2207: O 395: started
+2208: O 376: arrived to 1
+2209: O 1804: started
+2210: O 1805: started
+2211: O 9698: started
+2212: O 9698: arrived to 1
+2213: O 9707: started
+2214: O 9711: started
+2215: O 9714: started
+2216: O 385: arrived to 0
+2217: O 9719: started
+2218: O 1811: started
+2219: O 1812: started
+2220: O 399: arrived to 0
+2221: O 1813: started
+2222: O 1814: started
+2223: O 9745: started
+2224: O 1816: started
+2225: O 9753: started
+2226: O 9758: started
+2227: O 9760: started
+2228: O 1819: started
+2229: O 400: arrived to 1
+2230: O 1820: started
+2231: O 1821: started
+2232: O 1822: started
+2233: O 9768: started
+2234: O 1823: started
+2235: O 1824: started
+2236: O 1825: started
+2237: O 402: arrived to 0
+2238: O 9765: started
+2239: O 1827: started
+2240: O 1828: started
+2241: O 1829: started
+2242: O 1830: started
+2243: O 403: arrived to 1
+2244: O 1831: started
+2245: O 9827: started
+2246: O 9830: started
+2247: O 404: arrived to 1
+2248: O 1834: started
+2249: O 9837: started
+2250: O 1836: started
+2251: O 1837: started
+2252: O 405: arrived to 1
+2253: O 1838: started
+2254: O 1839: started
+2255: O 1840: started
+2256: O 406: arrived to 1
+2257: O 1841: started
+2258: O 1842: started
+2259: O 38: arrived to 1
+2260: O 407: arrived to 1
+2261: O 1844: started
+2262: O 1845: started
+2263: O 1846: started
+2264: O 1847: started
+2265: O 9902: started
+2266: O 9906: started
+2267: O 9906: arrived to 0
+2268: O 9875: started
+2269: O 1850: started
+2270: O 9916: started
+2271: O 9919: started
+2272: O 9929: started
+2273: O 9921: started
+2274: O 1854: started
+2275: O 1855: started
+2276: O 9954: started
+2277: O 410: arrived to 0
+2278: O 1857: started
+2279: O 1858: started
+2280: O 1859: started
+2281: O 9975: started
+2282: O 1860: started
+2283: O 9986: started
+2284: O 9991: started
+2285: O 1863: started
+2286: N 9: started
+2287: N 14: started
+2288: N 14: arrived to 0
+2289: N 19: started
+2290: N 25: started
+2291: N 31: started
+2292: O 1867: started
+2293: N 40: started
+2294: N 45: started
+2295: N 49: started
+2296: N 56: started
+2297: O 415: arrived to 1
+2298: O 1873: started
+2299: O 1874: started
+2300: O 416: arrived to 1
+2301: O 1875: started
+2302: O 1876: started
+2303: O 1877: started
+2304: N 76: started
+2305: N 77: started
+2306: N 85: started
+2307: N 90: started
+2308: N 95: started
+2309: O 414: arrived to 1
+2310: O 1883: started
+2311: N 106: started
+2312: O 1884: started
+2313: N 114: started
+2314: N 137: started
+2315: N 107: started
+2316: N 118: started
+2317: O 1888: started
+2318: O 1889: started
+2319: O 419: arrived to 1
+2320: O 1890: started
+2321: O 1891: started
+2322: O 1892: started
+2323: O 420: arrived to 0
+2324: O 1893: started
+2325: O 1894: started
+2326: O 1895: started
+2327: O 421: arrived to 0
+2328: O 1896: started
+2329: O 1897: started
+2330: O 1898: started
+2331: O 1899: started
+2332: N 202: started
+2333: N 202: arrived to 1
+2334: O 423: started
+2335: O 1902: started
+2336: O 1903: started
+2337: N 215: started
+2338: O 1905: started
+2339: N 221: started
+2340: N 223: started
+2341: O 1907: started
+2342: O 1908: started
+2343: N 233: started
+2344: N 236: started
+2345: N 236: arrived to 0
+2346: N 239: started
+2347: N 239: arrived to 0
+2348: O 1913: started
+2349: O 425: arrived to 1
+2350: O 1914: started
+2351: O 1915: started
+2352: N 301: started
+2353: N 261: started
+2354: N 261: arrived to 1
+2355: N 339: started
+2356: N 331: started
+2357: N 319: started
+2358: N 337: started
+2359: O 427: arrived to 1
+2360: N 337: arrived to 0
+2361: O 1923: started
+2362: N 374: started
+2363: N 355: started
+2364: O 1926: started
+2365: O 428: arrived to 0
+2366: O 1927: started
+2367: N 379: started
+2368: N 388: started
+2369: O 429: arrived to 0
+2370: O 1930: started
+2371: O 1931: started
+2372: O 1932: started
+2373: O 1933: started
+2374: N 418: started
+2375: N 425: started
+2376: O 1935: started
+2377: N 425: arrived to 1
+2378: O 1937: started
+2379: O 1938: started
+2380: O 431: arrived to 0
+2381: O 1939: started
+2382: O 1940: started
+2383: O 432: arrived to 0
+2384: O 1941: started
+2385: O 1942: started
+2386: O 1943: started
+2387: N 450: started
+2388: O 1945: started
+2389: O 433: arrived to 1
+2390: O 1946: started
+2391: O 1947: started
+2392: N 482: started
+2393: O 1949: started
+2394: O 1950: started
+2395: O 434: arrived to 1
+2396: O 1951: started
+2397: N 515: started
+2398: N 478: started
+2399: N 522: started
+2400: N 539: started
+2401: N 542: started
+2402: O 1957: started
+2403: N 548: started
+2404: N 552: started
+2405: O 1959: started
+2406: O 1960: started
+2407: O 436: arrived to 1
+2408: O 1961: started
+2409: O 1962: started
+2410: O 1963: started
+2411: O 1964: started
+2412: O 437: arrived to 1
+2413: O 1965: started
+2414: N 525: started
+2415: N 587: started
+2416: N 587: arrived to 0
+2417: O 438: arrived to 0
+2418: O 439: started
+2419: N 597: started
+2420: N 603: started
+2421: O 1972: started
+2422: O 1973: started
+2423: O 1969: arrived to 1
+2424: O 1974: started
+2425: N 627: started
+2426: O 1976: started
+2427: N 639: started
+2428: N 641: started
+2429: N 585: started
+2430: O 1979: started
+2431: N 783: started
+2432: O 1981: started
+2433: O 441: arrived to 1
+2434: O 1982: started
+2435: O 1983: started
+2436: O 1984: started
+2437: N 805: started
+2438: O 442: arrived to 0
+2439: O 47: started
+2440: O 1987: started
+2441: O 1988: started
+2442: O 1989: started
+2443: O 1990: started
+2444: O 1986: arrived to 0
+2445: O 1991: started
+2446: O 1992: started
+2447: O 444: arrived to 0
+2448: O 1993: started
+2449: N 855: started
+2450: N 859: started
+2451: N 863: started
+2452: O 445: arrived to 0
+2453: O 1996: started
+2454: O 1998: started
+2455: O 1999: started
+2456: N 870: started
+2457: O 2001: started
+2458: N 878: started
+2459: O 2002: started
+2460: O 2003: started
+2461: O 447: arrived to 0
+2462: O 2004: started
+2463: O 2005: started
+2464: O 2006: started
+2465: O 2007: started
+2466: O 2008: started
+2467: O 448: arrived to 1
+2468: N 946: started
+2469: N 950: started
+2470: O 443: arrived to 0
+2471: O 449: arrived to 1
+2472: N 957: started
+2473: N 931: started
+2474: N 1035: started
+2475: N 931: arrived to 0
+2476: N 1041: started
+2477: N 1048: started
+2478: O 2017: started
+2479: O 2019: started
+2480: O 450: arrived to 0
+2481: N 1079: started
+2482: N 1083: started
+2483: O 2021: started
+2484: O 2022: started
+2485: O 2023: started
+2486: O 2018: started
+2487: O 2024: started
+2488: O 2025: started
+2489: O 452: arrived to 1
+2490: O 2026: started
+2491: O 2027: started
+2492: O 453: arrived to 1
+2493: N 1137: started
+2494: N 1109: started
+2495: O 2030: started
+2496: N 1115: started
+2497: O 2032: started
+2498: N 1143: started
+2499: N 1145: started
+2500: N 1145: arrived to 1
+2501: N 1100: started
+2502: N 1152: started
+2503: N 1154: started
+2504: N 1157: started
+2505: N 1161: started
+2506: N 1169: started
+2507: N 1171: started
+2508: N 1180: started
+2509: O 2041: started
+2510: O 2042: started
+2511: O 458: started
+2512: N 1194: started
+2513: O 2044: started
+2514: O 2045: started
+2515: O 2046: started
+2516: O 2043: arrived to 1
+2517: O 2047: started
+2518: O 2048: started
+2519: O 2049: started
+2520: N 1240: started
+2521: N 1214: started
+2522: O 2051: started
+2523: O 2052: started
+2524: O 50: arrived to 0
+2525: O 460: arrived to 0
+2526: O 2054: started
+2527: O 2055: started
+2528: N 1311: started
+2529: N 1311: arrived to 1
+2530: O 2057: started
+2531: O 2058: started
+2532: O 2059: started
+2533: O 2060: started
+2534: O 461: arrived to 0
+2535: N 1328: started
+2536: O 16: boarding
+2537: O 2062: started
+2538: O 2063: started
+2539: O 2064: started
+2540: O 462: arrived to 0
+2541: O 2065: started
+2542: O 2066: started
+2543: O 2067: started
+2544: O 2068: started
+2545: N 1361: started
+2546: N 1364: started
+2547: N 1368: started
+2548: N 1368: arrived to 1
+2549: O 464: arrived to 1
+2550: O 2072: started
+2551: O 2073: started
+2552: O 2074: started
+2553: O 2075: started
+2554: N 1410: started
+2555: N 1415: started
+2556: N 1418: started
+2557: N 1395: started
+2558: N 1424: started
+2559: N 1425: started
+2560: N 1425: arrived to 1
+2561: N 1433: started
+2562: O 2081: started
+2563: O 466: arrived to 1
+2564: O 2083: started
+2565: O 2084: started
+2566: O 2085: started
+2567: O 468: arrived to 1
+2568: O 2086: started
+2569: O 2087: started
+2570: O 469: started
+2571: O 2089: started
+2572: O 2090: started
+2573: N 1575: started
+2574: O 2092: started
+2575: O 2088: arrived to 1
+2576: O 2093: started
+2577: O 2094: started
+2578: N 1588: started
+2579: N 1592: started
+2580: O 470: started
+2581: N 1544: started
+2582: N 1609: started
+2583: N 1586: started
+2584: O 2100: started
+2585: N 1620: started
+2586: O 2101: started
+2587: N 1627: started
+2588: O 2103: started
+2589: N 1636: started
+2590: O 2105: started
+2591: N 1645: started
+2592: N 1645: arrived to 1
+2593: O 2107: started
+2594: N 1677: started
+2595: N 1683: started
+2596: O 2109: started
+2597: O 2110: started
+2598: O 2111: started
+2599: O 55: arrived to 0
+2600: O 475: started
+2601: N 1714: started
+2602: O 2114: started
+2603: O 2115: started
+2604: O 2116: started
+2605: O 2117: started
+2606: O 2112: arrived to 0
+2607: O 2118: started
+2608: O 2119: started
+2609: N 1740: started
+2610: N 1744: started
+2611: N 1747: started
+2612: N 1751: started
+2613: O 2123: started
+2614: O 477: arrived to 0
+2615: O 2124: started
+2616: N 1765: started
+2617: O 2126: started
+2618: O 2127: started
+2619: O 478: arrived to 1
+2620: O 2128: started
+2621: O 2129: started
+2622: O 481: started
+2623: N 1798: started
+2624: O 2131: started
+2625: N 1803: started
+2626: O 2133: started
+2627: N 1812: started
+2628: O 2134: started
+2629: O 2135: started
+2630: O 2136: started
+2631: O 2137: started
+2632: N 1832: started
+2633: O 482: arrived to 1
+2634: O 2139: started
+2635: O 2140: started
+2636: O 483: started
+2637: O 2138: arrived to 0
+2638: O 2142: started
+2639: O 2143: started
+2640: O 2144: started
+2641: O 2145: started
+2642: O 2141: arrived to 0
+2643: O 2146: started
+2644: O 2147: started
+2645: O 2148: started
+2646: O 2149: started
+2647: O 484: arrived to 0
+2648: O 2150: started
+2649: N 1911: started
+2650: N 1914: started
+2651: O 480: arrived to 0
+2652: O 485: arrived to 1
+2653: O 2154: started
+2654: O 2155: started
+2655: O 2156: started
+2656: N 1926: started
+2657: N 1926: arrived to 0
+2658: O 2158: started
+2659: O 2159: started
+2660: O 2160: started
+2661: N 1949: started
+2662: N 1954: started
+2663: N 1955: started
+2664: O 2163: started
+2665: N 1972: started
+2666: O 2165: started
+2667: O 2165: arrived to 0
+2668: N 1982: started
+2669: N 1987: started
+2670: O 57: arrived to 1
+2671: N 1993: started
+2672: O 2170: started
+2673: O 2171: started
+2674: N 2005: started
+2675: N 2010: started
+2676: O 2174: started
+2677: O 2175: started
+2678: N 2048: started
+2679: N 2054: started
+2680: O 2167: started
+2681: O 2178: started
+2682: O 488: arrived to 1
+2683: O 2179: started
+2684: O 2180: started
+2685: O 2181: started
+2686: O 2182: started
+2687: N 2181: started
+2688: N 2179: started
+2689: O 2184: started
+2690: N 2193: started
+2691: O 59: arrived to 0
+2692: O 491: started
+2693: O 2187: started
+2694: O 2188: started
+2695: O 2188: arrived to 1
+2696: O 492: started
+2697: O 2191: started
+2698: O 2192: started
+2699: O 2193: started
+2700: N 2206: started
+2701: O 2195: started
+2702: O 2190: arrived to 0
+2703: O 2196: started
+2704: O 2197: started
+2705: O 2198: started
+2706: O 2199: started
+2707: O 2201: started
+2708: O 2203: started
+2709: O 2200: started
+2710: O 2205: started
+2711: O 2204: started
+2712: O 493: arrived to 1
+2713: O 2202: started
+2714: O 2206: started
+2715: O 2207: started
+2716: O 2208: started
+2717: O 2209: started
+2718: O 2210: started
+2719: O 490: arrived to 0
+2720: O 2212: started
+2721: O 494: arrived to 1
+2722: O 2212: arrived to 1
+2723: O 2214: started
+2724: O 2214: arrived to 0
+2725: O 2216: started
+2726: O 2218: started
+2727: O 2216: arrived to 1
+2728: O 2219: started
+2729: O 2220: started
+2730: O 2221: started
+2731: O 2222: started
+2732: O 2223: started
+2733: O 2224: started
+2734: O 2225: started
+2735: O 2226: started
+2736: O 2186: arrived to 1
+2737: O 2227: started
+2738: O 2228: started
+2739: O 2229: started
+2740: O 2230: started
+2741: O 495: arrived to 0
+2742: O 2217: started
+2743: O 2231: started
+2744: O 2232: started
+2745: O 2233: started
+2746: N 2271: started
+2747: O 2236: started
+2748: O 2237: started
+2749: O 496: arrived to 1
+2750: O 2237: arrived to 0
+2751: O 2238: started
+2752: O 2239: started
+2753: O 498: started
+2754: O 2241: started
+2755: O 497: arrived to 0
+2756: O 2242: started
+2757: O 2243: started
+2758: O 2244: started
+2759: O 2245: started
+2760: O 2246: started
+2761: O 2247: started
+2762: O 2240: arrived to 1
+2763: O 2248: started
+2764: O 2249: started
+2765: O 2250: started
+2766: O 60: arrived to 1
+2767: O 2252: started
+2768: O 499: arrived to 1
+2769: O 2253: started
+2770: N 2379: started
+2771: N 2379: arrived to 0
+2772: O 2256: started
+2773: O 2251: arrived to 1
+2774: O 2257: started
+2775: O 2258: started
+2776: N 2423: started
+2777: O 2259: started
+2778: O 2260: started
+2779: N 2532: started
+2780: O 2262: started
+2781: N 2632: started
+2782: N 2622: started
+2783: N 2681: started
+2784: N 2690: started
+2785: O 2266: started
+2786: O 2267: started
+2787: O 62: arrived to 0
+2788: O 2268: started

@@ -46,7 +46,7 @@ $(BIN): $(OBJ) $(TEST_OBJ)
 
 # Run the main program
 run: clean $(BIN)
-	./$(BIN) 4 4 10 10 10
+	./$(BIN) 10000 10000 10 10 10
 
 # Clean build directory
 clean:

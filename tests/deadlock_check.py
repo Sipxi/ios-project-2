@@ -41,7 +41,7 @@ def run_test(i, test_args):
 
 
 def main():
-    c_file = "src/main.c"
+    c_file = "proj2.c"
     if not compile_c_program(c_file):
         return
     

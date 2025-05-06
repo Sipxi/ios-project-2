@@ -5,8 +5,8 @@
  * Date: 18/05/2025
  * Time spent: 63h
  */
-#ifndef MAIN_H
-#define MAIN_H
+#ifndef PROJ2_H
+#define PROJ2_H
 #include <semaphore.h>  // sem_t
 #include <stdio.h>      // input output
 #include <stdlib.h>     //stol
