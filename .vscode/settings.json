@@ -1,7 +1,11 @@
 {
     "files.associations": {
-        "stdio.h": "c",
+        "mman.h": "c",
+        "stdlib.h": "c",
+        "time.h": "c",
+        "types.h": "c",
         "main.h": "c",
-        "time.h": "c"
+        "stdio.h": "c",
+        "semaphore.h": "c"
     }
 }

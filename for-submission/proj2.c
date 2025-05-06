@@ -5,7 +5,7 @@
  * Date: 18/05/2025
  * Time spent: 63h
  */
-#include "main.h"
+#include "proj2.h"
 /**
  * @brief Helper function to parse and validate an argument
  * @param value_str The value that has to be parsed
